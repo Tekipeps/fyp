@@ -1,0 +1,64 @@
+\section{Project background}
+On December 31, 2019, China confirmed an epidemic of a novel coronavirus in the city of Wuhan; as of now, the virus has spread worldwide. The new coronavirus was found in severe cases from the Huanan Seafood Wholesale market in Wuhan (2019-nCoV). The World Health Organization (WHO) on March 11, 2020, declared the novel coronavirus (COVID-19) outbreak a global pandemic \citep{cucinotta2020declares}.
+
+To combat the pandemic, rigorous measures were implemented all throughout the world. In March, social segregation and travel limitations, as well as advice on good handwashing procedures, went into place. However, because these measures were only expected to halt the virus's spread, scientists realized that a vaccine would be required to end the pandemic. On March 17, 2020, the first COVID-19 human vaccine trials with the modern mRNA vaccine will begin \citep{national2020nih}. 
+
+\comment{Problem statement should build from the  background of study
+ "Based on the background of study ......"
+}
+\section{Problem statement}
+The COVID19 is relatively new and as such, there is very little resource that provides a detailed overview of the virus. Researchers, students and people looking to gain solid understanding on the inner workings and behaviour of the virus have to dig the web deep to find something useful which is always mostly incomplete and not very explanatory. This resource will help answer certain questions concerning the outbreak, like:
+\begin{enumerate}
+	\item The origin and spread of the virus.
+	\item Evolution of the virus.
+	
+\end{enumerate}
+In many cases, genetic analysis of epidemic sequences leads to recommendations for specific virus sections that may be implicated in transmission or pathogenesis. Validating or refuting these assumptions in research, results in a more full picture of the virus, which can be used to improve epidemiological and evolutionary models, as well as directly inform treatment and preventative methods.
+
+\comment{- Provide accessibility to a resource that provides thorough understanding of the virus answering questions like:
+	-origin and spread of the virus (phylogenetic tree)
+	-Understanding the spread of the virus, including the mechanism, speed, and direction
+	- VIRAL EVOLUTION
+	- phylogeny, transmission and evolution
+	}
+
+\comment{
+By the end of this study I should be able to ......
+}
+\section{Aim and Objectives}
+Why should biologists be concerned with what computer scientists have to think? Many questions in modern biology can now only be answered via computational methods. First, these procedures are substantially faster than experimental approaches; second, many experimental results are incomprehensible without computational analysis. Genomic analysis of the virus sample is required to understand the virus outbreak and evolution. Viral sample sequencing is now easier and less expensive than ever before, and it can help epidemiologists by providing nucleotide-level precision of outbreak-causing infections. In this review, I will present a medium for answering important questions concerning the outbreak. I hope to establish a resource that will aid in understanding the virus and response to future outbreaks by describing patterns in the genomic data of the Sars-Cov-2 and its variants using bioinformatics and virology methods.
+
+\comment{
+Delimitations refer to the boundaries of the research study, based on the researcher’s decision of what to include and what to exclude. They narrow your study to make it more manageable and relevant to what you are trying to prove.
+
+Limitations relate to the validity and reliability of the study. They are characteristics of the research design or methodology that are out of your control but influence your research findings. Because of this, they determine the internal and external validity of your study and are considered potential weaknesses.
+
+In other words, limitations are what the researcher cannot do (elements outside of their control) and delimitations are what the researcher will not do (elements outside of the boundaries they have set).
+}
+
+\comment{The scope of study}
+\section{Scope and Delimitations of study}
+
+\comment{Methodology}
+\section{Methodology}
+The sars-cov-2 sequences will be downloaded from GISAID in FASTA format. \href{https://en.wikipedia.org/wiki/Sequence_alignment}{Sequence alignment} will be performed on the trimmed reads using \href{https://github.com/lh3/minimap2}{minmap2}(produces sam files) \comment{or  \href{bowtie2}{https://github.com/BenLangmead/bowtie2}} to find point mutations in multiple sequences. The resulting sam files will be sorted and indexed using \href{http://www.htslib.org/}{samtools}. Variant calling %(identify variants)%
+will be performed using the freebayes to identify where the aligned reads differ from the reference genome and write to a \href{https://samtools.github.io/hts-specs/VCFv4.2.pdf}{VCF} file.
+
+
+\comment{
+	\href{https://www.ncbi.nlm.nih.gov/sars-cov-2/}{ncbi}
+	.These are nucleotide level changes between sequences.
+	Synonymous and non-synonymous mutations. Does the mutation cause the protein (amino acids) generated by the codon change? If so it is non-synonymous else, synonymous. Phylogenetic tree, seeks to explain by use of a mathematical model (e.g Bayesian model) to explain the time frame and the process of specific mutations and the likelihood of those mutations happening at a natural steady pace.
+	
+	Limitations
+	Automatic extraction of genes from different coronaviruses
+	Good multi sequence compare tool
+	How similar are the other coronaviruses? (causes colds, not either SARS or MERS)
+}
+
+
+\comment{It is hoped that the outcome of this research.....}
+\section{Significance of study}
+
+\comment{Chapter organization}
+\section{Motivation}

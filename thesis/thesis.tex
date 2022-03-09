@@ -1,0 +1,91 @@
+\documentclass[12pt,paper=a4,twosided,cleardoubleage=plain,final]{report}
+\usepackage[utf8]{inputenc}
+
+% Hyperreferencing and citations
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	citecolor=blue,
+	filecolor=blue,
+	linkcolor=blue,
+	urlcolor=blue
+}
+
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+\usepackage{natbib}
+
+\usepackage{setspace}
+\onehalfspacing
+% single spacing for table of contents
+
+
+\usepackage{blindtext}
+\usepackage[left=1.5in, right=1in, top=1in, bottom=1in, includefoot, headheight=13.6pt]{geometry}
+
+% To comment multiline text
+\newcommand{\comment}[1]{}
+
+\title{
+	{Genomic analysis on Sars-Cov-2: \\ A bioinformatics approach}\\
+	{\large Anchor University Lagos}\\
+	{\vspace{10mm}{\includegraphics[scale=0.6]{university.png}}}
+}
+\author{Tekena Solomon}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\chapter*{Abstract}
+Abstract goes here... % \blindtext
+
+
+\chapter*{Keywords}
+keywords here?
+
+\chapter*{Dedication}
+To mum and dad
+
+%\chapter*{Declaration}
+%I declare that..
+
+\chapter*{Acknowledgements}
+I want to thank...
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\chapter{Introduction}
+\input{chapters/introduction}
+
+\chapter{Literature Review}
+\input{chapters/chapter02}
+
+\chapter{Methodology}
+\input{chapters/chapter03}
+
+\chapter{Results}
+\input{chapters/chapter04}
+
+\comment{summary, conclusion and recommendation}
+\chapter{Conclusion}
+\input{chapters/conclusion}
+
+
+
+
+\comment {
+Definition. An appendix contains supplementary material that is not an essential part of the text itself but which may be helpful in providing a more comprehensive understanding of the research problem or it is information that is too cumbersome to be included in the body of the paper.}
+
+\renewcommand{\bibname}{References}
+\bibliographystyle{apalike}
+\bibliography{chapters/references}
+
+\appendix
+\chapter{Appendix Title}
+\input{chapters/appendix}
+
+\end{document}
