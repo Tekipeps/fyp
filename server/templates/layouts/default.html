@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- You MUST include jQuery before Fomantic -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js"></script>
+
+    <title>{% block title %}{% endblock %} - Heart Disease Prediction</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div class="ui attached stackable menu">
+      <div class="ui container">
+        <a class="item" href="/"> <i class="home icon"></i> Home </a>
+        <a class="item" href="/lg"> <i class="book open icon"></i> Notebook </a>
+        <!-- <a class="item"> <i class="mail icon"></i> Messages </a> -->
+        <!-- <div class="ui simple dropdown item">
+          More
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a class="item"><i class="edit icon"></i> Edit Profile</a>
+            <a class="item"><i class="globe icon"></i> Choose Language</a>
+            <a class="item"><i class="settings icon"></i> Account Settings</a>
+          </div>
+        </div> -->
+        <!-- <div class="right item">
+          <div class="ui input">
+            <input type="text" placeholder="Search..." />
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <div id="content" class="ui container">
+      {% block content %}{% endblock %}
+    </div>
+    <div id="footer" class="ui container">
+      {% block footer %} &copy; Copyright 2008 by
+      <a href="http://domain.invalid/">you</a>. {% endblock %}
+    </div>
+  </body>
+</html>

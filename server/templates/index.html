@@ -1,12 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Heart disease prediction</title>
-  </head>
-  <body>
-    flask app here
-  </body>
-</html>
+{% extends "layouts/default.html" %} {% block title %}Home{% endblock %} {%
+block head %} {{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+</style>
+{% endblock %} {% block content %}
+<!-- Main content -->
+<div class="ui container">
+  <h1 class="ui huge header">Heart disease prediction</h1>
+
+  <p>
+    Heart disease or Cardiovascular disease (CVDs) are one of the leading causes
+    of death worldwide. This system is to predict wether has a chance to get
+    heart disease based on certain basic factors like gender, age, cholesterol,
+    blood pressure, diabetes, smoking, family history and physical activity.
+  </p>
+</div>
+
+<div class="ui container">
+  <h2>Details</h2>
+  <form action="/submit-data" class="ui form">
+    <div class="fields">
+      <div class="field">
+        <label>Gender</label>
+        <select name="gender" id="gender" class="ui fluid dropdown">
+          <option value="">Select...</option>
+          <option value="m">Male</option>
+          <option value="f">Female</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Age</label>
+        <input type="number" name="age" id="age" />
+      </div>
+    </div>
+    <div class="fields">
+      <div class="field">
+        <label
+          >Resting blood pressure (in mm Hg on admission to the hospital)</label
+        >
+        <input type="number" name="trestbps" id="trestbps" />
+      </div>
+      <div class="field">
+        <label>Serum cholestoral in mg/dl</label>
+        <input type="number" name="chol" id="chol" />
+      </div>
+    </div>
+    <div class="inline field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" />
+        <label>fasting blood sugar greater than 120 mg/dl</label>
+      </div>
+    </div>
+    <button class="ui button" type="submit">Submit</button>
+  </form>
+</div>
+{% endblock %}
