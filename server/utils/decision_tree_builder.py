@@ -1,69 +1,52 @@
-# init accuracy, max loop, and loop count
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+import joblib
+# import numpy as np
+# import matplotlib.pyplot as plt
 import pandas as pd
-_accuracy = 0.0
-_maxLoop = 10000
-_loopCount = 0
-_timeUpdate = 0
+
 
 # read csv using pandas library
 df = pd.read_csv("heart_dataset.csv")
 cols = ["age", "cp", "trestbps", "fbs", "restecg", "thalach"]
-# feature importace result per column using ExtraTreesClassifier
-# [ 0.26346508  0.13608912  0.2459563   0.02467597  0.03230045  0.29751308]
-# reduced columns based on feature selection == ["age", "cp", "trestbp", "thalach"]
 
-while _loopCount < _maxLoop:
-    # print every 1000 iteration
-    if _loopCount % 1000 == 0:
-        print("Current loop count: {} \nNumber of time tree updated: {} \nBest accuracy: {} \n".format(
-            _loopCount, _timeUpdate, _accuracy))
 
-    # split test and train data
-    from sklearn.model_selection import train_test_split
-    train_df, test_df = train_test_split(df, test_size=0.2)
-    train_cols = train_df[list(cols)].values
-    train_target = train_df["condition"].values
-    test_cols = test_df[list(cols)].values
-    test_target = test_df["condition"].values
+# Feature Scaling
+scal = StandardScaler()
+feat = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg',
+        'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal']
+df[feat] = scal.fit_transform(df[feat])
 
-    # build decision tree using training data
-    from sklearn import tree
-    clf = tree.DecisionTreeClassifier(criterion="entropy", max_depth=3)
-    clf.fit(train_cols, train_target)
+joblib.dump(scal, "models/standard_scaler.pkl")
 
-    # test decision tree using test data
-    predict = clf.predict(test_cols)
-    false_prediction = 0
-    for index, val in enumerate(predict):
-        if test_target[index] != val:
-            false_prediction = false_prediction + 1
+# Dataset splitting
 
-    # calculate new accuracy
-    _newAccuracy = float(len(train_cols) - false_prediction) / \
-        float(len(test_cols)) * 100
+X = df.drop("condition", axis=1).values
+Y = df.condition.values
+X_train, X_test, Y_train, Y_test = train_test_split(
+    X, Y, random_state=2, test_size=0.1)
 
-    # check if this tree is better than the previous tree
-    if _newAccuracy > _accuracy:
-        # renew accuracy and add update count
-        _accuracy = _newAccuracy
-        _timeUpdate = _timeUpdate + 1
+# Fitting Decision Tree Classification to the Training set
 
-        # save train data
-        train_df.to_csv("data/dataset_train.csv")
+clf = tree.DecisionTreeClassifier(criterion="entropy", max_depth=3)
+clf.fit(X_train, Y_train)
 
-        # save test data
-        test_df.to_csv("data/dataset_test.csv")
+# Saving the model
+filename = 'models/decision_tree_model.pkl'
+joblib.dump(clf, filename)
 
-        # save tree
-        from six import StringIO
-        with open("result/decisiontree.dot", 'w') as f:
-            f = tree.export_graphviz(clf, out_file=f, feature_names=cols)
+# Predicting the Test set results
+y_pred = clf.predict(X_test)
 
-        # export tree
-        import os
-        os.system('dot -Tpng result/decisiontree.dot -o result/decisiontree.png')
+# checking the accuracy for predicted results
+accuracy_score(Y_test, y_pred)
 
-    # increment loop counter
-    _loopCount = _loopCount + 1
+# Confusion metrics
+cm = confusion_matrix(Y_test, y_pred)
 
-print("Final accuracy: {} \nDone.".format(_accuracy))
+# Interpretation:
+print(classification_report(Y_test, y_pred))
