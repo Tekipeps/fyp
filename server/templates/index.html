@@ -7,96 +7,226 @@ block head %} {{ super() }}
 </style>
 {% endblock %} {% block content %}
 <!-- Main content -->
-<div class="ui container">
-  <h1 class="ui huge header">Heart disease prediction</h1>
+<div class="">
+  <div class="md:w-1/2 w-full px-5 md:px-40">
+    <h1 class="text-2xl font-bold text-neutral-800">
+      Heart disease prediction
+    </h1>
+  </div>
 
-  <p>
-    Heart disease or Cardiovascular disease (CVDs) are one of the leading causes
-    of death worldwide. This system is to predict wether has a chance to get
-    heart disease based on certain basic factors like gender, age, cholesterol,
-    blood pressure, diabetes, smoking, family history and physical activity.
-  </p>
+  <div class="w-full px-5 md:px-40 mt-2">
+    <p class="text-neutral-700 text-sm md:text-base tracking-wide">
+      Heart disease or Cardiovascular disease (CVDs) are one of the leading
+      causes of death worldwide. This system is to predict wether has a chance
+      to get heart disease based on certain basic factors like gender, age,
+      cholesterol, blood pressure, diabetes, smoking, family history and
+      physical activity.
+    </p>
+  </div>
 </div>
 
-<div class="ui container">
-  <h2>Details</h2>
-
+<div class="flex flex-col gap-3 mt-5">
+  <div class="md:w-1/2 w-full px-5 md:px-40">
+    <h2 class="text-lg font-bold text-neutral-800">Details</h2>
+  </div>
 
   <form action="{{ url_for('predict')}}" method="post">
-    <div class="form-row">
-      <div class="form-group col-md-6"><input class="form-control" type="text" name="name" placeholder="Your Name">
+    <div class="flex flex-col gap-5 justify-start items-center md:px-40 px-5">
+      <div class="flex md:flex-row flex-col gap-5 w-full">
+        <div class="md:w-1/2">
+          <input
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            type="text"
+            name="name"
+            placeholder="Your Name"
+          />
+        </div>
+
+        <div class="md:w-1/2">
+          <input
+            type="number"
+            name="age"
+            id="age"
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            placeholder="Your Age eg. 34"
+          />
+        </div>
       </div>
-      <div class="form-group col-md-6"><input class="form-control" type="number" name="age"
-          placeholder="Your Age eg. 34"></div>
-      <div class="form-group col-md-6"><input class="form-control" type="number" name="trestbps"
-          placeholder="Resting blood pressure (trsestbps) eg-130mm/hg"></div>
-      <div class="form-group col-md-6"><input class="form-control" type="number" name="chol"
-          placeholder="Serum cholestoral in mg/dl (chol) eg-250"></div>
-      <div class="form-group col-md-6"><input class="form-control" type="number" name="thalach"
-          placeholder="Maximum heart rate achieved (thalach) eg-187"></div>
-      <div class="form-group col-md-6"><input class="form-control" type="number" name="oldpeak"
-          placeholder="ST depression value (oldpeak) eg-4"></div>
-      <div class="form-group col-md-6"><input class="form-control" type="number" name="ca"
-          placeholder="Number of major vessels (0-3) colored by flourosopy (ca) eg-0"></div>
-      <div class="form-group col-md-6">
-        <select class="custom-select" id="cuisine" name="sex" placeholder="sex">
-          <option value="none">Select a Gender</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
+
+      <div class="flex md:flex-row flex-col gap-5 w-full">
+        <div class="md:w-1/2">
+          <input
+            type="number"
+            name="trestbps"
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            placeholder="Resting blood pressure (trsestbps) eg-130mm/hg"
+          />
+        </div>
+
+        <div class="md:w-1/2">
+          <input
+            type="number"
+            name="chol"
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            placeholder="Serum cholestoral in mg/dl (chol) eg-250"
+          />
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <select class="custom-select" name="cp" placeholder="cp">
-          <option value="none">Select Chest pain Type</option>
-          <option value="Typical angina">Typical angina</option>
-          <option value="Atypical angina">Atypical angina</option>
-          <option value="Non-anginal pain">Non-anginal pain</option>
-          <option value="Asymptomatic">Asymptomatic</option>
-        </select>
+
+      <div class="flex md:flex-row flex-col gap-5 w-full">
+        <div class="md:w-1/2">
+          <input
+            type="number"
+            name="thalach"
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            placeholder="Maximum heart rate achieved (thalach) eg-187"
+          />
+        </div>
+
+        <div class="md:w-1/2">
+          <input
+            type="number"
+            name="oldpeak"
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            placeholder="ST depression value (oldpeak) eg-4"
+          />
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <select class="custom-select" name="exang" placeholder="exang">
-          <option value="none">Select exercise induced angina</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
+
+      <div class="flex md:flex-row flex-col gap-5 w-full">
+        <div class="md:w-1/2">
+          <input
+            type="number"
+            name="ca"
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            placeholder="Number of major vessels (0-3) colored by flourosopy (ca) eg-0"
+          />
+        </div>
+
+        <div class="md:w-1/2">
+          <select
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            id="cuisine"
+            name="sex"
+            placeholder="sex"
+          >
+            <option value="none">Select a Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <select class="custom-select" name="fbs" placeholder="fbs">
-          <option value="none">Select fasting blood sugar > 120 mg/dl</option>
-          <option value="Yes">Yes</option>
-          <option value="No">No</option>
-        </select>
+
+      <div class="flex md:flex-row flex-col gap-5 w-full">
+        <div class="md:w-1/2">
+          <select
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            name="cp"
+            placeholder="cp"
+          >
+            <option value="none">Select Chest pain Type</option>
+            <option value="Typical angina">Typical angina</option>
+            <option value="Atypical angina">Atypical angina</option>
+            <option value="Non-anginal pain">Non-anginal pain</option>
+            <option value="Asymptomatic">Asymptomatic</option>
+          </select>
+        </div>
+
+        <div class="md:w-1/2">
+          <select
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            name="exang"
+            placeholder="exang"
+          >
+            <option value="none">Select exercise induced angina</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <select class="custom-select" name="slope" placeholder="slope">
-          <option value="none">Select slope of the peak exercise</option>
-          <option value="Upsloping: better heart rate with excercise(uncommon)">Upsloping: better heart rate with
-            excercise(uncommon)</option>
-          <option value="Flatsloping: minimal change(typical healthy heart)">Flatsloping: minimal change(typical healthy
-            heart)</option>
-          <option value="Downsloping: signs of unhealthy heart">Downsloping: signs of unhealthy heart</option>
-        </select>
+
+      <div class="flex md:flex-row flex-col gap-5 w-full">
+        <div class="md:w-1/2">
+          <select
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            name="fbs"
+            placeholder="fbs"
+          >
+            <option value="none">Select fasting blood sugar > 120 mg/dl</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+
+        <div class="md:w-1/2">
+          <select
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            name="slope"
+            placeholder="slope"
+          >
+            <option value="none">Select slope of the peak exercise</option>
+            <option
+              value="Upsloping: better heart rate with excercise(uncommon)"
+            >
+              Upsloping: better heart rate with excercise(uncommon)
+            </option>
+            <option value="Flatsloping: minimal change(typical healthy heart)">
+              Flatsloping: minimal change(typical healthy heart)
+            </option>
+            <option value="Downsloping: signs of unhealthy heart">
+              Downsloping: signs of unhealthy heart
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <select class="custom-select" name="thal" placeholder="thal">
-          <option value="none">Select heart rate condition(thal)</option>
-          <option value="fixed defect: used to be defect but ok now">fixed defect: used to be defect but ok now</option>
-          <option value="reversable defect: no proper blood movement when excercising">Freversable defect: no proper
-            blood movement when excercising</option>
-          <option value="normal">normal</option>
-        </select>
+
+      <div class="flex md:flex-row flex-col gap-5 w-full">
+        <div class="md:w-1/2">
+          <select
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            name="thal"
+            placeholder="thal"
+          >
+            <option value="none">Select heart rate condition(thal)</option>
+            <option value="fixed defect: used to be defect but ok now">
+              fixed defect: used to be defect but ok now
+            </option>
+            <option
+              value="reversable defect: no proper blood movement when excercising"
+            >
+              Freversable defect: no proper blood movement when excercising
+            </option>
+            <option value="normal">normal</option>
+          </select>
+        </div>
+
+        <div class="md:w-1/2">
+          <select
+            class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+            name="restecg"
+            placeholder="resecg"
+          >
+            <option value="none">
+              Select resting electrocardiographic results
+            </option>
+            <option value="Nothing to note">Nothing to note</option>
+            <option value="ST-T Wave abnormality">ST-T Wave abnormality</option>
+            <option value="Possible or definite left ventricular hypertrophy">
+              Possible or definite left ventricular hypertrophy
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <select class="custom-select" name="restecg" placeholder="resecg">
-          <option value="none">Select resting electrocardiographic results</option>
-          <option value="Nothing to note">Nothing to note</option>
-          <option value="ST-T Wave abnormality">ST-T Wave abnormality</option>
-          <option value="Possible or definite left ventricular hypertrophy">Possible or definite left ventricular
-            hypertrophy</option>
-        </select>
+
+      <div class="sm:w-1/2 w-full">
+        <button
+          type="submit"
+          class="text-white bg-neutral-800 hover:bg-neutral-900 focus:outline-none focus:ring-4 focus:ring-neutral-300 font-medium rounded-0 w-full font-medium text-sm py-2"
+        >
+          Predict
+        </button>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-block btn-large pt-3">Predict</button>
+  </form>
 </div>
 {% endblock %}
