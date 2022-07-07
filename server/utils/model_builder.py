@@ -1,9 +1,9 @@
-from sklearn.metrics import classification_report, confusion_matrix
-from sklearn.metrics import classification_report
-from sklearn.metrics import accuracy_score
+from sklearn.linear_model import LogisticRegression
 from sklearn import tree
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
 import joblib
 # import numpy as np
 # import matplotlib.pyplot as plt
@@ -28,25 +28,38 @@ joblib.dump(scal, "models/standard_scaler.pkl")
 X = df.drop("condition", axis=1).values
 Y = df.condition.values
 X_train, X_test, Y_train, Y_test = train_test_split(
-    X, Y, random_state=2, test_size=0.1)
+    X, Y, test_size=0.05, stratify=Y)
 
 # Fitting Decision Tree Classification to the Training set
 
 clf = tree.DecisionTreeClassifier(criterion="entropy", max_depth=3)
 clf.fit(X_train, Y_train)
 
-# Saving the model
+# Saving the decision tree model
 filename = 'models/decision_tree_model.pkl'
 joblib.dump(clf, filename)
 
-# Predicting the Test set results
-y_pred = clf.predict(X_test)
+# Using 15 neighbours as it got the highest score
+clf = KNeighborsClassifier(n_neighbors=15)
+clf.fit(X_train, Y_train)
 
-# checking the accuracy for predicted results
-accuracy_score(Y_test, y_pred)
+# Saving the knn model
+filename = 'models/knn.pkl'
+joblib.dump(clf, filename)
 
-# Confusion metrics
-cm = confusion_matrix(Y_test, y_pred)
+# Naive bayes model
+gnb = GaussianNB()
+gnb.fit(X_train, Y_train)
 
-# Interpretation:
-print(classification_report(Y_test, y_pred))
+# Saving the naive bayes model
+filename = 'models/naivebayes.pkl'
+joblib.dump(clf, filename)
+
+# Logistic Regression model
+
+clf = LogisticRegression()
+clf.fit(X_train, Y_train)
+
+# Saving the logistic regression model
+filename = 'models/logisticregression.pkl'
+joblib.dump(clf, filename)

@@ -1,14 +1,25 @@
+from os import path, walk
+from unicodedata import category
+from unittest import result
 from flask import Flask
-from flask import render_template, redirect, url_for, request
-from flask import Flask, render_template, url_for, request
+from flask import render_template, redirect, url_for, request, flash, session
+from flask import Flask
+from flask_assets import Bundle, Environment
+
 import numpy as np
 from server.lib import prediction
 
 # import visualization
 import matplotlib.pyplot as plt
 
-
 app = Flask(__name__)
+app.config.from_envvar('APPLICATION_SETTINGS')
+assets = Environment(app)
+
+css = Bundle("src/main.css", output="dist/main.css")
+
+assets.register("css", css)
+css.build()
 
 
 def create_figure1(data1):
@@ -64,12 +75,12 @@ def home():
     return render_template('index.html')
 
 
-@app.route("/lg")
+@app.route("/notebook")
 def notebook():
     return render_template('lg.html')
 
 
-@app.route("/pred", methods=['POST'])
+@app.route("/predict", methods=['POST'])
 def predict():
     if request.method == 'POST':
         age = request.form['age']
@@ -86,7 +97,14 @@ def predict():
         ca = request.form['ca']
         thal = request.form['thal']
 
-        result = prediction.preprocess(
+        session["user"] = request.form["name"]
+
+        if age == "" or trestbps == "" or chol == "" or thalach == "" or oldpeak == "" or ca == "":
+            flash(
+                "Age, Trestbps, Chol, Thalach, Oldpeak, and CA are required", category="error")
+            return redirect(url_for('home'))
+
+        results = prediction.preprocess(
             age, sex, cp, trestbps, restecg, chol, fbs, thalach, exang, oldpeak, slope, ca, thal)
 
         # database.crudOperation(age,sex,cp,trestbps,restecg,chol,fbs,thalach,exang,oldpeak,slope,ca,thal,result)
@@ -96,7 +114,11 @@ def predict():
         # create_figure2(data2)
         # return render_template('result.html', prediction=result, nameofpatient=nameofpatient, model_counter=counter, total_counter=counter2)
 
-        return render_template('index.html', title='Pred')
+        return render_template('index.html', results=results)
         # return res
     else:
-        return redirect(url_for('home'))
+        return render_template('index.html')
+
+
+if __name__ == "__main__":
+    app.run()

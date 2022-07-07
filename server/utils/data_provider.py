@@ -4,6 +4,9 @@ import joblib
 
 config = {
     'heart': {
+        'LogisticRegression': 'models/logisticregression.pkl',
+        'NaiveBayes': 'models/naivebayes.pkl',
+        'KNN': 'models/knn.pkl',
         'DecisionTree': 'models/decision_tree_model.pkl',
         'scalar_file': 'models/standard_scaler.pkl',
     }}
