@@ -55,13 +55,14 @@ block head %} {{ super() }}
         <div class="flex md:flex-row flex-col gap-5 w-full">
           <div class="md:w-1/2">
             <input
-              class="bg-neutral-100 hover:border-neutral-400  focus:ring-neutral-800  block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400 focus:border-neutral-800  block w-full px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 transition duration-300 rounded focus:outline-none focus:bg-white border"
               type="text" name="name" placeholder="Your Name" required />
+
           </div>
 
           <div class="md:w-1/2">
             <input type="number" name="age" id="age"
-              class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800  block px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800  block px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               placeholder="Your Age eg. 34" required />
           </div>
         </div>
@@ -69,13 +70,13 @@ block head %} {{ super() }}
         <div class="flex md:flex-row flex-col gap-5 w-full">
           <div class="md:w-1/2">
             <input type="number" name="trestbps"
-              class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800  block px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800  block px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               placeholder="Resting blood pressure (trestbps) eg-130mm/hg" required />
           </div>
 
           <div class="md:w-1/2">
             <input type="number" name="chol"
-              class="bg-neutral-100 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400 focus:ring-neutral-800 focus:border-neutral-800 block px-3 py-2 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               placeholder="Serum cholestoral in mg/dl (chol) eg-250" required />
           </div>
         </div>
@@ -83,13 +84,13 @@ block head %} {{ super() }}
         <div class="flex md:flex-row flex-col gap-5 w-full">
           <div class="md:w-1/2">
             <input type="number" name="thalach"
-              class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800  block px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800  block px-3 py-2 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               placeholder="Maximum heart rate achieved (thalach) eg-187" required />
           </div>
 
           <div class="md:w-1/2">
             <input type="number" name="oldpeak"
-              class="bg-neutral-100 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block px-3 py-2 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               placeholder="ST depression value (oldpeak) eg-4" step="0.01" required />
           </div>
         </div>
@@ -97,13 +98,13 @@ block head %} {{ super() }}
         <div class="flex md:flex-row flex-col gap-5 w-full">
           <div class="md:w-1/2">
             <input type="number" name="ca"
-              class="bg-neutral-100 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800  block  px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400 focus:border-neutral-800 focus:ring-neutral-800  block  px-3 py-2 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               placeholder="Number of major vessels (0-3) colored by flourosopy (ca) eg-0" required />
           </div>
 
           <div class="md:w-1/2">
             <select
-              class="bg-neutral-100 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-3 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               id="cuisine" name="sex" placeholder="sex" required>
               <option value="none">Select Gender (sex)</option>
               <option value="1">Male</option>
@@ -112,10 +113,10 @@ block head %} {{ super() }}
           </div>
         </div>
 
-        <div class="flex md:flex-row flex-col gap-5 ">
+        <div class="flex md:flex-row flex-col gap-5 w-full">
           <div class="md:w-1/2">
             <select
-              class="bg-neutral-100 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-3 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               name="cp" placeholder="cp" required>
               <option>Select Chest pain Type</option>
               <option value="0">Typical angina</option>
@@ -125,9 +126,9 @@ block head %} {{ super() }}
             </select>
           </div>
 
-          <div class="md:w-1/2">
+          <div class="md:w-1/2 w-full">
             <select
-              class="bg-neutral-100 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-3 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               name="exang" placeholder="exang" required>
               <option>Select exercise induced angina (exang</option>
               <option value="1">Yes</option>
@@ -136,10 +137,10 @@ block head %} {{ super() }}
           </div>
         </div>
 
-        <div class="flex md:flex-row flex-col gap-5 ">
+        <div class="flex md:flex-row flex-col gap-5 w-full">
           <div class="md:w-1/2">
             <select
-              class="bg-neutral-100 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-3 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               name="fbs" placeholder="fbs" required>
               <option value="none">Select fasting blood sugar > 120 mg/dl (fbs)</option>
               <option value="1">Yes</option>
@@ -149,7 +150,7 @@ block head %} {{ super() }}
 
           <div class="md:w-1/2">
             <select
-              class="bg-neutral-100 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-3 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               name="slope" placeholder="slope" required>
               <option>Select slope of the peak exercise (slope)</option>
               <option value="0">
@@ -165,10 +166,10 @@ block head %} {{ super() }}
           </div>
         </div>
 
-        <div class="flex md:flex-row flex-col gap-5 ">
+        <div class="flex md:flex-row flex-col gap-5 w-full">
           <div class="md:w-1/2">
             <select
-              class="bg-neutral-100 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700  transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 py-3 sm:text-base text-sm border-neutral-300 text-neutral-700  transition duration-300 rounded focus:outline-none focus:bg-white border"
               name="thal" placeholder="thal" required>
               <option value="none">Select heart rate condition(thal)</option>
               <option value="6">
@@ -183,7 +184,7 @@ block head %} {{ super() }}
 
           <div class="md:w-1/2">
             <select
-              class="bg-neutral-100 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 sm:text-base text-sm border-neutral-300 rounded-0 text-neutral-700 w-full transition duration-300"
+              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-3 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
               name="restecg" placeholder="resecg" required>
               <option value="none">
                 Select resting electrocardiographic results
@@ -199,7 +200,7 @@ block head %} {{ super() }}
 
         <div class="sm:w-1/2 w-full">
           <button type="submit"
-            class="text-white bg-neutral-800 hover:bg-neutral-900 focus:outline-none focus:ring-4 focus:ring-neutral-300 rounded-0 w-full font-medium text-sm py-2">
+            class="text-white bg-neutral-800 hover:bg-neutral-900 focus:outline-none focus:ring-4 focus:ring-neutral-300 w-full font-medium text-sm py-2">
             Predict
           </button>
         </div>
