@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+	.input-field{
+		@apply bg-gray-200 hover:border-neutral-400 focus:border-neutral-800 block px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border
+	}
+}
