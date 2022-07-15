@@ -14,5 +14,6 @@
 *.lof
 *.lot
 *.out
+*.lol
 _minted-*/
 __pycache__/
