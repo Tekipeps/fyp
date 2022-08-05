@@ -1,0 +1,40 @@
+{% extends "layouts/default.html" %} {% block title %}Result{% endblock %} {%
+block head %} {{ super() }}
+<style type="text/css">
+</style>
+{% endblock %} {% block content %}
+{% if results | length > 0%}
+<div class="px-5 flex flex-col  md:px-40">
+    <div class="w-full overflow-x-auto shadow-md sm:rounded-lg my-5">
+        <table class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead
+                class="table-header-group text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Algorithm</th>
+                    <th scope="col" class="px-6 py-3">Result</th>
+                </tr>
+            </thead>
+            <tbody class="table-row-group">
+                {% for result in results %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                        {{result["algorithm"]}}</th>
+                    <td class="px-6 py-4 ">
+                        {% if result["output"][0] == 0 %}
+                        <span class="text-green-600">Not at risk of heart disease</span>
+                        {% else%}
+                        <span class="text-red-600"> At risk of heart disease</span>
+                        {% endif%}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="px-5 flex flex-col items-center md:px-40">
+    <h1>No result</h1>
+</div>
+{% endif %}
+{% endblock%}

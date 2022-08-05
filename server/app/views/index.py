@@ -1,39 +1,19 @@
-from flask import Flask
-from flask import render_template, redirect, url_for, request, flash, session
-from flask import Flask
-from flask_assets import Bundle, Environment
+from flask import Blueprint, render_template, request, session, flash, redirect, url_for
+from app.lib.prediction import process
 
-from server.lib import prediction
+index = Blueprint("index", __name__, url_prefix="/")
 
-# import visualization
-import matplotlib.pyplot as plt
-
-app = Flask(__name__)
-app.config.from_envvar('APPLICATION_SETTINGS')
-assets = Environment(app)
-
-css = Bundle("src/main.css", output="dist/main.css")
-
-assets.register("css", css)
-css.build()
-
-def pred(age, sex, cp, trestbps, chol, fbs, restegc, thalac, exang, oldpeak, slope, ca, thal):
-    print(age, sex, cp, trestbps, chol, fbs, restegc,
-          thalac, exang, oldpeak, slope, ca, thal)
-    return None
-
-
-@app.route("/")
+@index.route("/")
 def home():
     return render_template('index.html')
 
 
-@app.route("/notebook")
+@index.route("/notebook")
 def notebook():
     return render_template('heart_disease.html')
 
 
-@app.route("/predict", methods=['POST'])
+@index.route("/predict", methods=['POST'])
 def predict():
     if request.method == 'POST':
         age = request.form['Age']
@@ -57,11 +37,7 @@ def predict():
         
         user_input =[int(age), sex, chestpaintype, int(restingbp), int(cholesterol), int(fastingbs), restecg, int(maxhr), exerciseangina, float(oldpeak), st_slope]
 
-        results = prediction.process(user_input)
-        return render_template('index.html', results=results)
+        results = process(user_input)
+        return render_template('result.html', results=results)
     else:
         return render_template('index.html')
-
-
-if __name__ == "__main__":
-    app.run()

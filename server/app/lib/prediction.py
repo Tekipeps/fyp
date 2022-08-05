@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
-from server.utils import data_provider
-
-
+from app.utils import data_provider
 
 def pred_logistic_regression(inp, cols):
     ohe = data_provider.GetOneHotEncoderNonTree()
@@ -51,7 +49,6 @@ def pred_decision_tree(inp, cols, string_cols):
 # order Age,Sex,ChestPainType,RestingBP,Cholesterol,FastingBS,RestingECG,MaxHR,ExerciseAngina,Oldpeak,ST_Slope
 # sample 37,M,ASY,140,207,0,Normal,130,Y,1.5,Flat
 def process(user_input):
-    print(user_input)
     string_cols = ['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope']
     colums = ['Age','Sex','ChestPainType','RestingBP','Cholesterol','FastingBS','RestingECG','MaxHR','ExerciseAngina','Oldpeak','ST_Slope']
 
