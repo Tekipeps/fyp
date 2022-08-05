@@ -36,7 +36,13 @@ block head %} {{ super() }}
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
           <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
             {{result["algorithm"]}}</th>
-          <td class="px-6 py-4">{{result["output"]}}</td>
+          <td class="px-6 py-4">
+            {% if result["output"][0] == 0 %}
+            Not at risk of heart disease
+            {% else%}
+            At risk of heart disease
+            {% endif%}
+          </td>
         </tr>
         {% endfor %}
       </tbody>
@@ -51,115 +57,111 @@ block head %} {{ super() }}
     <img class="min-w-full" src="{{ url_for('static', filename='images/sample-inputs.png')}}" alt="sample-inputs">
 
     <form action="{{ url_for('predict')}}" method="post">
-      <div class="flex flex-col gap-5 justify-start items-center">
+      <div class="flex flex-col gap-3 justify-start items-center">
         <div class="flex md:flex-row flex-col gap-5 w-full">
           <div class="md:w-1/2">
-            <input
-              class="input-field"
-              type="text" name="name" placeholder="Your Name" required />
-
+            <label for="">Name</label>
+            <input class="input-field" type="text" name="name" placeholder="Your Name" required />
           </div>
 
           <div class="md:w-1/2">
-            <input type="number" name="age" id="age"
-              class="input-field"
-              placeholder="Your Age eg. 34" required />
+            <label for="">Age</label>
+            <input type="number" name="Age" id="age" class="input-field" placeholder="Your Age eg. 34" required />
           </div>
         </div>
 
         <div class="flex md:flex-row flex-col gap-5 w-full">
-          <div class="md:w-1/2">
-            <input type="number" name="trestbps"
-              class="input-field"
-              placeholder="Resting blood pressure (trestbps) eg-130mm/hg" required />
+          <div class="md:w-1/2 w-full">
+            <label for="">RestingBP</label>
+            <input type="number" name="RestingBP" class="input-field"
+              placeholder="Resting blood pressure (RestingBP) eg-130mm/hg" required />
           </div>
 
-          <div class="md:w-1/2">
-            <input type="number" name="chol"
-              class="input-field"
-              placeholder="Serum cholestoral in mg/dl (chol) eg-250" required />
-          </div>
-        </div>
-
-        <div class="flex md:flex-row flex-col gap-5 w-full">
-          <div class="md:w-1/2">
-            <input type="number" name="thalach"
-              class="input-field"
-              placeholder="Maximum heart rate achieved (thalach) eg-187" required />
-          </div>
-
-          <div class="md:w-1/2">
-            <input type="number" name="oldpeak"
-              class="input-field"
-              placeholder="ST depression value (oldpeak) eg-4" step="0.01" required />
-          </div>
-        </div>
-
-        <div class="flex md:flex-row flex-col gap-5 w-full">
-          <div class="md:w-1/2">
-            <input type="number" name="ca"
-              class="input-field"
-              placeholder="Number of major vessels (0-3) colored by flourosopy (ca) eg-0" required />
-          </div>
-
-          <div class="md:w-1/2">
-            <select
-              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
-              id="cuisine" name="sex" placeholder="sex" required>
-              <option value="none">Select Gender (sex)</option>
-              <option value="1">Male</option>
-              <option value="0">Female</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="flex md:flex-row flex-col gap-5 w-full">
-          <div class="md:w-1/2">
-            <select
-              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
-              name="cp" placeholder="cp" required>
-              <option>Select Chest pain Type</option>
-              <option value="0">Typical angina</option>
-              <option value="1">Atypical angina</option>
-              <option value="2">Non-anginal pain</option>
-              <option value="3">Asymptomatic</option>
-            </select>
-          </div>
 
           <div class="md:w-1/2 w-full">
+            <label for="">MaxHR</label>
+            <input type="number" name="MaxHR" class="input-field" placeholder="Maximum heart rate achieved eg-187"
+              required />
+          </div>
+        </div>
+        <div class="flex md:flex-row flex-col gap-5 w-full">
+          <div class="w-full">
+            <label for="">Oldpeak</label>
+            <input type="number" name="Oldpeak" class="input-field" step="0.01"
+              placeholder="ST depression induced by exercise relative to rest (Oldpeak) eg-1.5" required />
+          </div>
+        </div>
+
+        <div class="flex md:flex-row flex-col gap-5 w-full">
+          <div class="md:w-1/2 w-full">
+            <label for="">Cholesterol</label>
+            <input type="number" name="Cholesterol" class="input-field"
+              placeholder="Serum cholestoral in mg/dl (chol) eg-250" required />
+          </div>
+
+          <div class="md:w-1/2">
+            <label for="sex">Sex</label>
             <select
               class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
-              name="exang" placeholder="exang" required>
-              <option>Select exercise induced angina (exang</option>
-              <option value="1">Yes</option>
-              <option value="0">No</option>
+              id="sex" name="Sex" placeholder="sex" required>
+              <!-- <option value="none">Select Gender (sex)</option> -->
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex md:flex-row flex-col gap-5 w-full">
+          <div class="md:w-1/2 w-full">
+            <label for="">Exercise induced angina (ExerciseAngina)</label>
+            <select
+              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
+              name="ExerciseAngina" placeholder="ExerciseAngina" required>
+              <!-- <option>Select exercise induced angina (ExerciseAngina)</option> -->
+              <option value="Y">Yes</option>
+              <option value="N">No</option>
+            </select>
+          </div>
+
+          <div class="md:w-1/2">
+            <label for="">Chest pain Type (ChestPainType)</label>
+            <select
+              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
+              name="ChestPainType" placeholder="ChestPainType" required>
+              <!-- <option>Select Chest pain Type (ChestPainType)</option> -->
+              <option value="TA">Typical angina</option>
+              <option value="ATA">Atypical angina</option>
+              <option value="NAP">Non-anginal pain</option>
+              <option value="ASY">Asymptomatic</option>
             </select>
           </div>
         </div>
 
         <div class="flex md:flex-row flex-col gap-5 w-full">
           <div class="md:w-1/2">
+            <label for="">Fasting blood sugar > 120 mg/dl (FastingBS)</label>
             <select
               class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
-              name="fbs" placeholder="fbs" required>
-              <option value="none">Select fasting blood sugar > 120 mg/dl (fbs)</option>
+              name="FastingBS" placeholder="FastingBS" required>
+              <!-- <option value="none">Select fasting blood sugar > 120 mg/dl (FastingBS)</option> -->
               <option value="1">Yes</option>
               <option value="0">No</option>
             </select>
           </div>
 
           <div class="md:w-1/2">
+            <label for="">Slope of the peak exercise (ST_Slope)</label>
             <select
               class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
-              name="slope" placeholder="slope" required>
-              <option>Select slope of the peak exercise (slope)</option>
-              <option value="0">
+              name="ST_Slope" placeholder="ST_Slope" required>
+              <!-- <option>Select slope of the peak exercise (ST_Slope)</option> -->
+              <option value="Up">
                 Upsloping: better heart rate with excercise(uncommon)
               </option>
-              <option value="1">
+              <option value="Flat">
                 Flatsloping: minimal change(typical healthy heart)
               </option>
-              <option value="2">
+              <option value="Down">
                 Downsloping: signs of unhealthy heart
               </option>
             </select>
@@ -167,31 +169,19 @@ block head %} {{ super() }}
         </div>
 
         <div class="flex md:flex-row flex-col gap-5 w-full">
-          <div class="md:w-1/2">
-            <select
-              class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block w-full px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700  transition duration-300 rounded focus:outline-none focus:bg-white border"
-              name="thal" placeholder="thal" required>
-              <option value="none">Select heart rate condition(thal)</option>
-              <option value="6">
-                Fixed defect: used to be defect but ok now
-              </option>
-              <option value="7">
-                Reversable defect: no proper blood movement when excercising
-              </option>
-              <option value="2.31">Normal</option>
-            </select>
-          </div>
 
-          <div class="md:w-1/2">
+
+          <div class="w-full">
+            <label for="">Resting electrocardiographic results (RestingECG)</label>
             <select
               class="bg-gray-200 hover:border-neutral-400  focus:ring-neutral-800 focus:border-neutral-800 block  px-3 py-2 sm:text-base text-sm border-neutral-300 text-neutral-700 w-full transition duration-300 rounded focus:outline-none focus:bg-white border"
-              name="restecg" placeholder="resecg" required>
-              <option value="none">
-                Select resting electrocardiographic results
-              </option>
-              <option value="0">Nothing to note</option>
-              <option value="1">ST-T Wave abnormality</option>
-              <option value="2">
+              name="RestingECG" placeholder="RestingECG" required>
+              <!-- <option value="none">
+                Select resting electrocardiographic results (RestingECG)
+              </option> -->
+              <option value="Normal">Nothing to note</option>
+              <option value="ST">ST-T Wave abnormality</option>
+              <option value="LVH">
                 Possible or definite left ventricular hypertrophy
               </option>
             </select>

@@ -4,11 +4,13 @@ import joblib
 
 config = {
     'heart': {
-        'LogisticRegression': 'models/logisticregression.pkl',
+        'LogisticRegression': 'models/logistic_regression.pkl',
         'NaiveBayes': 'models/naivebayes.pkl',
         'KNN': 'models/knn.pkl',
-        'DecisionTree': 'models/decision_tree_model.pkl',
-        'scalar_file': 'models/standard_scaler.pkl',
+        'DecisionTree': 'models/decision_tree.pkl',
+        'scalar_non_tree': 'models/minmax_scaler_non_tree.pkl',
+        'label_encoder_tree': 'models/label_encoder.pkl',
+        'one_hot_encoder_nontree': 'models/ohe_transformer.pkl'
     }}
 
 dir = os.path.dirname(__file__)
@@ -26,25 +28,30 @@ def GetPickleFile(filepath):
     return None
 
 
-def GetStandardScalarForHeart():
-    return GetJobLibFile(config['heart']['scalar_file'])
+def GetMinMaxScalerNonTree():
+    return GetJobLibFile(config['heart']['scalar_non_tree'])
+
+def GetLabelEncoderTree():
+    return GetJobLibFile(config['heart']['label_encoder_tree'])
+
+def GetOneHotEncoderNonTree():
+    return GetJobLibFile(config['heart']['one_hot_encoder_nontree'])
+    
+def GetAllClassifiers():
+    return (GetLogisticRegressionClassifier(), GetNaiveBayesClassifier(), GetDecisionTreeClassifier(), GetKNNClassifier())
 
 
-def GetAllClassifiersForHeart():
-    return (GetLogisticRegressionClassifierForHeart(), GetNaiveBayesClassifierForHeart(), GetDecisionTreeClassifierForHeart(), GetKNNClassifierForHeart())
-
-
-def GetLogisticRegressionClassifierForHeart():
+def GetLogisticRegressionClassifier():
     return GetJobLibFile(config['heart']['LogisticRegression'])
 
 
-def GetNaiveBayesClassifierForHeart():
+def GetNaiveBayesClassifier():
     return GetJobLibFile(config['heart']['NaiveBayes'])
 
 
-def GetDecisionTreeClassifierForHeart():
+def GetDecisionTreeClassifier():
     return GetJobLibFile(config['heart']['DecisionTree'])
 
 
-def GetKNNClassifierForHeart():
+def GetKNNClassifier():
     return GetJobLibFile(config['heart']['KNN'])

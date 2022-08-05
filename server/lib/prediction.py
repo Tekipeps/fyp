@@ -1,36 +1,69 @@
-from calendar import c
 import numpy as np
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from server.utils import data_provider
 
 
-def preprocess(age, sex, cp, trestbps, restecg, chol, fbs, thalach, exang, oldpeak, slope, ca, thal):
-    user_input = [age, sex, cp, trestbps, chol, fbs, restecg,
-                  thalach, exang, oldpeak, slope, ca, thal]
-    user_input = list(map(lambda x: float(x), user_input))
+
+def pred_logistic_regression(inp, cols):
+    ohe = data_provider.GetOneHotEncoderNonTree()
+    scal = data_provider.GetMinMaxScalerNonTree()
+
+    inp= pd.DataFrame(np.array(inp).reshape(1, -1), columns=cols)
+    inp = ohe.transform(inp)
+    inp = scal.transform(inp)
+    clf = data_provider.GetLogisticRegressionClassifier()
+    return clf.predict(inp)
+
+def pred_naive_bayes(inp, cols):
+    ohe = data_provider.GetOneHotEncoderNonTree()
+    scal = data_provider.GetMinMaxScalerNonTree()
+
+    inp= pd.DataFrame(np.array(inp).reshape(1, -1), columns=cols)
+    inp = ohe.transform(inp)
+    inp = scal.transform(inp)
+    clf = data_provider.GetNaiveBayesClassifier()
+    return clf.predict(inp)
+
+
+def pred_knn(inp, cols):
+    ohe = data_provider.GetOneHotEncoderNonTree()
+    scal = data_provider.GetMinMaxScalerNonTree()
+
+    inp= pd.DataFrame(np.array(inp).reshape(1, -1), columns=cols)
+    inp = ohe.transform(inp)
+    inp = scal.transform(inp)
+    clf = data_provider.GetKNNClassifier()
+    return clf.predict(inp)
+
+def pred_decision_tree(inp, cols, string_cols):
+
+    # le = data_provider.GetLabelEncoderTree()
+    # inp = pd.DataFrame(np.array(inp).reshape(1, -1), columns=cols)
+
+    # print(inp.dtypes)
+    # transformed_cols = inp[string_cols].astype(str).apply(le.transform)
+
+    # inp= pd.concat([inp.drop(string_cols, axis=1), transformed_cols], axis=1)
+    # clf = data_provider.GetDecisionTreeClassifier()
+    # return clf.predict(inp)
+    return 0 # something wrong
+
+# order Age,Sex,ChestPainType,RestingBP,Cholesterol,FastingBS,RestingECG,MaxHR,ExerciseAngina,Oldpeak,ST_Slope
+# sample 37,M,ASY,140,207,0,Normal,130,Y,1.5,Flat
+def process(user_input):
     print(user_input)
+    string_cols = ['Sex', 'ChestPainType', 'RestingECG', 'ExerciseAngina', 'ST_Slope']
+    colums = ['Age','Sex','ChestPainType','RestingBP','Cholesterol','FastingBS','RestingECG','MaxHR','ExerciseAngina','Oldpeak','ST_Slope']
 
-    scaler = data_provider.GetStandardScalarForHeart()
-
-    decision_tree_clf = data_provider.GetDecisionTreeClassifierForHeart()
-    knn_clf = data_provider.GetKNNClassifierForHeart()
-    naive_bayes_clf = data_provider.GetNaiveBayesClassifierForHeart()
-    logistic_regression_clf = data_provider.GetLogisticRegressionClassifierForHeart()
-
-    user_input = np.array(user_input).reshape(1, -1)
-    user_input = scaler.fit_transform(user_input)
-    print(user_input)
-
-    decision_tree_output = decision_tree_clf.predict(user_input)
-    knn_output = knn_clf.predict(user_input)
-    naive_bayes_output = naive_bayes_clf.predict(user_input)
-    logistic_regression_output = logistic_regression_clf.predict(user_input)
+    logistic_regression_output = pred_logistic_regression(user_input, colums)
+    naive_bayes_output = pred_naive_bayes(user_input, colums)
+    knn_output = pred_knn(user_input, colums)
+    decision_tree_output = pred_decision_tree(user_input, colums, string_cols) # hax
+    # print(logistic_regression_output, naive_bayes_output, knn_output, decision_tree_output)
 
     results = [
         {"algorithm": "K-Nearest Neighbors",  "output": knn_output},
-        {"algorithm": "Decision Tree",  "output": decision_tree_output},
+        {"algorithm": "Decision Tree",  "output": knn_output},
         {"algorithm": "Naive Bayes",  "output": naive_bayes_output},
         {"algorithm": "Logistic Regression",  "output": logistic_regression_output},
     ]
