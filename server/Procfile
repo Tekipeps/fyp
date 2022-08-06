@@ -1,1 +1,1 @@
-web: gunicorn 'app:create_app()'
+web:  sh -c "cd ./server && gunicorn 'app:create_app()'"
