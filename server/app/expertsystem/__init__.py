@@ -1,5 +1,5 @@
 import yaml
-
+from os import path
 
 def parse_conditions(kb, table):
     inference = ""
@@ -9,23 +9,26 @@ def parse_conditions(kb, table):
             if condition.startswith(">"):
                 val = int(condition[1:])
                 if table[attrname] > val:
-                    inference += attribute[attrname]["messages"][condition]
+                    inference += attribute[attrname]["messages"][condition] + " "
+                    print(inference)
             elif condition.startswith("<"):
                 val = int(condition[1:])
                 if table[attrname] < val:
-                    inference += attribute[attrname]["messages"][condition]
+                    inference += attribute[attrname]["messages"][condition] + " "
             elif condition == "True":
                 if table[attrname] == True:
-                    inference += attribute[attrname]["messages"][condition]
+                    inference += attribute[attrname]["messages"][condition] + " "
             elif condition == "False":
                 if table[attrname] == False:
-                    inference += attribute[attrname]["messages"][condition]
+                    inference += attribute[attrname]["messages"][condition] + " "
+
     return inference
 
 
 def load_kb():
     kb = ""
-    with open("kb.yaml", "r") as stream:
+    filename =  path.join(path.dirname(path.abspath(__file__)), "kb.yaml")
+    with open(filename, "r") as stream:
         try:
             kb = yaml.safe_load(stream)
         except yaml.YAMLError as exc:
@@ -36,7 +39,7 @@ def load_kb():
 def get_inference(restingbp, fbs, cholesterol):
     # lookup table
     table = { "restingbp": restingbp, "fbs": fbs, "cholesterol": cholesterol}
-    
+
     kb = load_kb()
 
     inference = parse_conditions(kb, table)

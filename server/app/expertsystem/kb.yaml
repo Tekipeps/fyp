@@ -4,20 +4,19 @@
       - ">100"
       - "<60"
     messages:
-      ">100": MIGHT BE A SIGN OF TACHYCARDIA.
-      "<60": MIGHT BE A SIGN OF BRADYCARDIA.
+      ">100": High resting blood pressure, might be a sign of TACHYCARDIA.
+      "<60": Low resting blood pressure, might be a sign of BRADYCARDIA.
 - fbs:
     conditions:
       - "True"
     messages:
       "True":
-        EATING SOME PROTEIN OR HEALTHY FAT WITH ABOUT 15 GRAMS OF CARBS BEFORE
-        BED, HELPS TO KEEP THE MORNING FASTING NUMBERS IN TARGET RANGE.
+        Eating some protein or healthy fat with about 15 grams of carbs before bed,
+        helps to keep the morning fasting blood sugar in target range.
 - cholesterol:
     conditions:
       - ">159"
     messages:
       ">159":
-        YOU HAVE HIGH LEVELS OF CHOLESTEROL, WHICH IS NOT GOOD AND MAY CAUSE
-        atherosclerosis. YOU CAN REDUCE YOUR CHOLESTEROL LEVEL BY  REDUCE SMOKING
-        AND ALCOHOL INTAKE, PROPER DIET AND EXERCISE.
+        You have high levels of cholesterol which is not good, and may cause ATHEROSLEROSIS. You can reduce
+        your cholesterol level by reducing smoking and alcohol intake, proper diet and exercise.

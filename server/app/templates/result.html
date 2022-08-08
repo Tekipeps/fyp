@@ -37,4 +37,12 @@ block head %} {{ super() }}
     <h1>No result</h1>
 </div>
 {% endif %}
+{% if inference %}
+<div class="px-5 flex flex-col items-center md:px-40">
+    <div class="w-full mb-2">
+        <h1 class="font-bold text-gray-600">Inference</h1>
+    </div>
+    <p>{{inference}}</p>
+</div>
+{% endif %}
 {% endblock%}

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, session, flash, redirect, url_for
 from app.lib.prediction import process
+from app.expertsystem import get_inference
 
 index = Blueprint("index", __name__, url_prefix="/")
 
@@ -38,6 +39,7 @@ def predict():
         user_input =[int(age), sex, chestpaintype, int(restingbp), int(cholesterol), int(fastingbs), restecg, int(maxhr), exerciseangina, float(oldpeak), st_slope]
 
         results = process(user_input)
-        return render_template('result.html', results=results)
+        inference = get_inference(restingbp=int(restingbp), fbs=bool(int(fastingbs)), cholesterol=int(cholesterol))
+        return render_template('result.html', results=results, inference=inference)
     else:
         return render_template('index.html')
