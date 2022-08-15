@@ -46,8 +46,8 @@
 \lstset{style=mystyle}
 %for code highlighting
 
+\usepackage{enumitem} %% for enumerate a b c]
 \usepackage{setspace}
-\onehalfspacing
 % single spacing for table of contents
 
 \setlength{\parindent}{3em}
@@ -57,8 +57,39 @@
 \usepackage{soul}
 % set times new roman
 \usepackage{newtxtext, newtxmath}
+\usepackage{floatrow} % 2 images on one row
 
-% To comment multiline text
+\usepackage{titletoc}% 
+\titlecontents{chapter}% <section-type>
+[0pt]% <left>
+{}% <above-code>
+{\bfseries\chaptername\ \thecontentslabel\quad}% <numbered-entry-format>
+{\bfseries}% <numberless-entry-format>
+{\bfseries\hfill\contentspage}% <filler-page-format>
+
+%\usepackage{titlesec}
+% \titleformat{\section}[block]{\Large\bfseries\filcenter}{}{1em}{}
+% \titleformat{\section}[hang]{\bfseries}{}{1em}{}
+
+
+% THE CODE I'VE TRIED
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+% \patchcmd{<cmd>}{<search>}{<replace>}{<success>}{<failure>}
+% --- Patch \chapter
+\patchcmd{\@makechapterhead}{50\p@}{\chapheadtopskip}{}{}% Space from top of page to CHAPTER X
+\patchcmd{\@makechapterhead}{20\p@}{\chapheadsep}{}{}% Space between CHAPTER X and CHAPTER TITLE
+\patchcmd{\@makechapterhead}{40\p@}{\chapheadbelowskip}{}{}% Space between CHAPTER TITLE and text
+% --- Patch \chapter*
+\patchcmd{\@makeschapterhead}{0\p@}{\chapheadtopskip}{}{}% Space from top of page to CHAPTER TITLE
+\patchcmd{\@makeschapterhead}{40\p@}{\chapheadbelowskip}{}{}% SPace between CHAPTER TITLE and text
+\makeatother
+% Set new lengths
+\newlength{\chapheadtopskip}\setlength{\chapheadtopskip}{5pt}
+\newlength{\chapheadsep}\setlength{\chapheadsep}{5pt}
+\newlength{\chapheadbelowskip}\setlength{\chapheadbelowskip}{5pt}
+% END THE CODE I'VE TRIED
+
 \newcommand{\comment}[1]{}
 
 \title{
@@ -70,34 +101,39 @@
 \author{Tekena Solomon}
 \date{\today}
 
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
 \begin{document}
 
 
 \maketitle
-
+\doublespacing
 \begin{abstract}
-	Abstract goes here...
-	\comment{
-		Heart disease, often known as cardiovascular disease, encompasses a variety of disorders that affect the heart and has been the leading cause of mortality worldwide in recent years. It is associated with numerous risk factors in heart disease and a necessity of the time to obtain accurate, reliable, and sensible techniques to make an early diagnosis in order to achieve fast treatment strategies. In the health sector, data mining is a widely utilized technique for processing massive amounts of data. Researchers use a variety of data mining and machine learning approaches to analyze massive amounts of complex medical data, assisting healthcare providers in predicting heart disease. This study discusses many aspects of cardiac disease, as well as a model based on supervised learning techniques. Nave Bayes,1 decision tree, and K-nearest neighbor.
-	}
+		Heart disease, often known as cardiovascular disease, encompasses a variety of disorders that affect the heart and has been the leading cause of mortality worldwide in recent years. Because of the many factors that can increase the likelihood of developing heart disease, it is essential to create efficient and effective methods of early identification. This study discusses four different machine learning models based on supervised learning techniques like naive bayes, decision tree, logistic regression and K-nearest neighbours. A web interface is built to provide users a way to interact with the model. The system also has an inference engine that provides a descriptive output and medical advice based on the input data.
+
 \end{abstract}
 
-\chapter*{Keywords}
-keywords here?
+
+%\chapter*{Keywords}
+%keywords here?
 
 \chapter*{Dedication}
-...
+This project is dedicated to my mum, who has always been there for me and encouraged me to keep going, even when times were tough; to my friends Allwell and Sahil, who have been there for me through thick and thin.
 
 %\chapter*{Declaration}
 %I declare that..
+%
+%\chapter*{Acknowledgements}
+%I want to thank...
 
-\chapter*{Acknowledgements}
-I want to thank...
+{
+	\onehalfspacing
+	\tableofcontents
+	%\listoftables
+	\listoffigures
+	%\lstlistoflistings
+}
 
-\tableofcontents
-\listoftables
-\listoffigures
-\lstlistoflistings
 
 \chapter{Introduction}
 \input{chapters/introduction}
@@ -105,18 +141,17 @@ I want to thank...
 \chapter{Literature Review}
 \input{chapters/chapter02}
 
-\chapter{Materials and methods}
+\chapter{Research Methodology}
+\label{chap:3}
 \input{chapters/chapter03}
 
-\chapter{Implementation and results}
+\chapter{Implementation and Results}
 \label{chap:4}
 \input{chapters/chapter04}
 
 \comment{summary, conclusion and recommendation}
 \chapter{Conclusion}
 \input{chapters/conclusion}
-
-
 
 
 \comment {

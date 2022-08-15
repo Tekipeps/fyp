@@ -1,14 +1,13 @@
-\section{Introduction}
-In this chapter, the review of literature relevant to the study area of the heart disease prediction using machine learning techniques is carried out and one of the major focuses is to explain the history and empirical basics of this study.
+In this chapter, the review of literature relevant to the study area of the heart disease prediction using machine learning techniques is carried out and one of the major focuses is to explain the history and empirical basis of this study.
 
 \section{Heart disease}
-Heart disease is a term used to represent a variety of illnesses or conditions that affect the heart, including coronary artery disease, heart rhythm issues (arrhythmias), hereditary defects (congenital heart defects), heart valve disease, diseases of the heart muscle, and infections of the heart.
+Heart disease is a term used to represent a variety of illnesses or conditions that affect the heart, including coronary artery disease, heart rhythm issues (arrhythmias), hereditary defects (congenital heart defects), heart valve disease, diseases of the heart muscle, and infections of the heart. Heart disease can be caused by things like underlying health problems, contamination, irritation, and family history. To help prevent cardiovascular disease, you should live a healthy lifestyle and stay away from smoking, food that makes you fat, and stress. Heart disease is a serious problem in many countries around the world.
 
 \subsection{Typical heart problems}
 
 The factors that cause the heart to break down include any major abnormal heart or blood vessel condition known as coronary disease. The different sorts of heart disease are:
 
-\begin{itemize}
+\begin{enumerate}[label=(\alph*)]
 	\item{Coronary Artery Disease: refers to arrangement of cholesterol plaque which causes solidifying or restricting of the heart channel, (which supplies blood to the heart).}
 	\item{Cardiomyopathy: refers to a disease of the heart muscle that makes it harder for the heart to pump blood to the rest of the body.}
 	\item{Angina: a type of chest pain caused by reduced blood flow to the heart.}
@@ -21,17 +20,89 @@ The factors that cause the heart to break down include any major abnormal heart 
 	
 	\item{Ischemic Heart Disease (IHD): is the term given to heart problems caused by narrowed heart arteries.}
 	
-\end{itemize}
+\end{enumerate}
 
+\subsection{Symptoms of heart disease}
 The above-mentioned heart diseases are only a few of the many heart diseases that affect both men and women. These can be detected by paying close attention to the common factors that cause heart disease. The following are some of the most prevalent symptoms of heart disease:
 
-\begin{itemize}
+\begin{enumerate}[label=(\alph*)]
 	\item{Having pain in the upper body such as the arms, jaw, neck, back or upper stomach.}
 	\item{Significant strain, discomfort, or a burning pain in the chest.}
 	\item{Rapidly expanding heartbeat.}
 	\item{Unsteadiness, sweating and nausea.}
 	\item{Swelling, anxiety, cough, aching, burning and so on...}
-\end{itemize}
+\end{enumerate}
+
+\subsection{Cure of heart disease}
+According to \citefullauthor{Clinic2022Can}, unfortunately, there is no cure for coronary heart disease, and once recognized, the illness cannot be reversed. However, one can make lifestyle adjustments to minimize their chances of having other health issues, such as a heart attack.
+
+\section{Machine Learning}
+Machine learning is a branch of artificial intelligence that is focused on making systems that can learn from their experiences and make predictions based on what they have learned. It uses a training dataset to teach machine learning algorithms so that a model can be made. With the new information, the model can predict heart disease. Using machine learning, it looks for hidden patterns in the input dataset to build models. It can accurately predict what will happen with new data sets. The data set is cleaned up, and values that are missing are added. The model uses the new data to make predictions about heart disease, which are then tested to see how well they work. 
+
+\subsection{Techniques for machine learning}
+Techniques for machine learning can be grouped into supervised learning, unsupervised learning, and reinforcement learning.
+
+\subsubsection{Supervised learning}
+The model is trained on a labelled data set. The dataset contains the inputs and an outcome. Data are sorted and separated into training datasets and test datasets. Training dataset is used to train our model, and testing dataset is used as new data to test how well the model works. 
+A good example of this is the classification and regression.
+\subsubsection{Unsupervised learning}
+The data set does not contain any classed or labelled data used for training. The objective is to uncover patterns within the data. The model has been taught to create patterns. It can quickly identify hidden patterns in every new input dataset, but after further data exploration, it uses the datasets to derive conclusions about hidden patterns.
+With this method, the dataset has no responses. An example of an unsupervised learning method is the clustering approach.
+\subsubsection{Reinforcement learning}
+In this method, the model refines its presentation based on its association with the environment. It doesn't use labelled datasets, and neither the results nor the data are linked to the datasets. Instead, the model learns from what it does. It also determines how to disclose its flaws and how to attain the desired conclusion by assessing and testing a variety of potential outcomes.
+Classification algorithms are a popular type of supervised learning technique that are used to determine the likelihood of an individual having heart disease.
+
+
+\subsection{Classification Machine Learning Techniques}
+To classify something means to recognize it, comprehend it and place it in a set of categories that have already been established. Machine learning programs utilize several algorithms. Machine learning systems use multiple methods to classify new datasets based on previously classified training datasets. The following subsections discuss the algorithms used in this study.
+
+\subsubsection{Logistic regression}
+Classification algorithms, such as logistic regression, are supervised.
+This statistical model is frequently employed in categorization and predictive analytics. Based on a collection of independent variables, logistic regression calculates the likelihood that a certain event will occur. 
+
+As a result, the dependent variable is limited to a range of 0 to 1. 
+Independent variables are analysed to determine the binary outcome with the results falling into one of two categories. The independent variables can be categorical or numeric, but the dependent variable is always categorical. Written like this: $$P(Y=1|X) or P(Y=0|X)$$
+It calculates the probability of dependent variable Y, given independent variable X. 
+
+
+\subsubsection{Naive Bayes}
+Naïve Bayes  is a machine learning algorithm used to solve classification problems. Naïve Bayes is based on the Bayes Theorem and is one of the simplest yet powerful ML algorithms in use. It finds applications in many industries.
+
+The Bayes' theorem is used by Naïve Bayes algorithm, which also assumes that each predictor is independent. To put it another way, this classifier makes the assumption that the presence of one specific feature in a class has no influence on the presence of another.
+
+\begin{figure}[htb]
+	\centering
+	\makebox[0cm]{\includegraphics[scale=0.5]{nb.png}}
+	\caption{Naive bayes}
+	\label{fig:nb}
+\end{figure}
+
+\subsubsection{K-nearest neighbours}
+The K-nearest neighbors (KNN) algorithm is a form of supervised learning technique that can be used for regression as well as classification. KNN performs a distance calculation between the test data and all of the training points in an effort to determine which class the data being evaluated should be assigned to. The K number of points that should be selected is the one that comes closest to the test data. The KNN algorithm computes the chance that the test data belong to the same classes as the 'K' training data, and the class that retains the highest probability is the one that is chosen. In the case of regression, the value is determined by calculating the average of the 'K' training points that were chosen.
+
+Say we have a picture of something that looks like both a cat and a dog, but we want to know if it's a cat or a dog. We can use the KNN method for this identification because it measures similarity. Our KNN model will look for similarities between the new data set and the images of cats and dogs. Based on the similarities it finds, it will put the new data set into either the cat or dog category.
+
+\begin{figure}[htb]
+	\centering
+	\makebox[0cm]{\includegraphics[scale=0.45]{KNN.png}}
+	\caption{K-nearest neighbours}
+	\label{fig:knn}
+\end{figure}
+
+\subsubsection{Decision Tree}
+A decision tree is a non-parametric supervised learning algorithm that can be used for both classification and regression tasks. As a supervised learning technique, a decision tree is ideal for classifying issues at a precise level of detail. Like a flow chart, it takes data from the "tree trunk" and divides it into two related categories at a time: "branches" and "leaves." This allows for organic classification with minimal human oversight by creating categories within categories.
+
+\comment{
+	\begin{figure}[htb]
+		\centering
+		\makebox[0cm]{\includegraphics[scale=0.45]{dt.png}}
+		\caption{Decision tree}
+		\label{fig:dt}
+	\end{figure}
+}
+
+
+\comment{
 
 \section{Machine learning}
 Machine learning is a subfield of artificial intelligence (AI) and computer science that uses data and algorithms to mimic how humans learn, gradually improving its accuracy. It primarily focuses on teaching computers to learn and adapt from real facts and data while also improving with experience.
@@ -48,14 +119,14 @@ Here are some benefits of machine learning in medicine.
 	\item{Predictions of outbreaks.}
 	
 	\item {Prediction of liver and cardiovascular disease.}
-\end{enumerate}
-
+\end{enumerate}d
+}
 \section{Related works}{
 \setlength{\parskip}{1em}
 
 \citealp{taneja2013heart}, applied data mining and AI calculations to be specific, Decision Tree (J48 calculation), Artificial Neural Networks (ANN), Naive Bayes, and for heart illness forecast. A dataset of 7339 occasions with 15 elements has been selected from PGI Chandigarh. WEKA 3.6.4 instrument was utilized for the test. For model preparation and testing 10-Fold, Cross-Validation strategies are utilized arbitrarily. Best First Search strategy was utilized to select the most ideal attributes from the available 15 ascribes and among them just 8 attributes have been chosen. Each experiment was finished in two distinct situations, the initial one containing each of the 15 attributes and the second case just 8 selected attributes.
 
-\citealp{yan2006multilayer} fostered a multiplayer perceptron-based choice help system to help the determination of coronary heart disease. The input layer of the system includes 40 input variables, categorized into four groups and then encoded using the proposed coding schemes. The number of nodes in the hidden layer is determined through a cascade learning process. In the system, the missing data of a patient are handled using the substituting mean method. A total of 352 medical records collected from the patients suffering from five heart diseases have been used to train and test the system. The results show that the proposed MLP-based decision support system can achieve very high diagnosis accuracy (>90\%) and comparably small intervals (<5\%), proving its usefulness in support of clinic decision process of heart diseases.
+\citealp{yan2006multilayer} fostered a multiplayer perceptron-based choice help system to help the determination of coronary heart disease. The input layer of the system includes 40 input variables, categorized into four groups and then encoded using the proposed coding schemes. The number of nodes in the hidden layer is determined through a cascade learning process. In the system, the missing data of a patient are handled using the substituting mean method. A total of 352 medical records collected from the patients suffering from five heart diseases have been used to train and test the system. The results show that the proposed MLP-based decision support system can achieve very high diagnosis accuracy greater than (90\%) and comparably small intervals less than (5\%), proving its usefulness in support of clinic decision process of heart diseases.
 
 \citealp{setthukkarase2012intelligent} fostered another neutral fluffy strategy to analyze current realities of the illness in patients reports. The summed-up database is designed for decision-production from a diminished arrangement of qualities, which is the result of the hereditary calculation. Four layered fluffy neutral networks are utilized for effective displaying and surmising with time reliance under vulnerability.
 
@@ -68,10 +139,10 @@ Here are some benefits of machine learning in medicine.
 \citealp{ordonez2001mining} studied on the prediction of heart disease with the assistance of affiliation rules. They utilized a straightforward planning calculation. This algorithm regards attributes as numeric. It is utilized to change over clinical records into exchange designs. Improved calculations are utilized to minify confined affiliation rules. The mapping table is ready and the characteristic worth is planned to the item. Decision trees are utilized for data mining since they naturally partition numeric qualities. Split points chosen in the choice tree are seldom utilized. Grouping is utilized to acquire a general comprehension of the data
 
 
-\citealp{babu2017heart} proposed a system for anticipating heart disease with a blend of feedforward and backpropagation algorithms with the assistance of artificial neural networks. Tests are performed considering single and multi-facet neural network models. Parallel processing is carried out to speed up the growing experience in every neuron of all hidden result layers.
+\citealp{babu2017heart}  have proposed that medical data mining can uncover hidden patterns in medical datasets. Clinical diagnosis could make good use of these patterns. Standardize data collection. Age, sex, blood pressure, blood sugar, and other medical profile factors can help in predicting heart disease risk. These features are input into K-means, MAFIA, and Decision tree classification in heart disease prediction, employing data mining to heart disease treatment; it can deliver a reliable performance in diagnosing heart disease. By doing so, medical industries can provide better patient diagnosis and treatment, improving service quality. This paper's key benefits include early detection, accurate diagnosis, and affordable treatment.
 
 
-\citealp{pattekari2012prediction} utilized the Naive Bayesian Classification procedure to foster choice support in the coronary illness expectation system. The system tracks down hidden information from past coronary illness datasets. This is the best model for anticipating coronary illness. The model can answer complex questions and has its own solidarity concerning simplicity of model understanding, admittance to more precision  and information.
+\citealp{pattekari2012prediction} designed an Intelligent System using the Naive Bayes modeling method for data mining. It is set up as a web-based application in which the user answers questions that have already been set up. It gets hidden data from the database where it is stored and compares the user's values with the trained data set. It can answer complicated questions about heart disease and help doctors make smart clinical decisions, which is something that traditional decision support systems can't do. It also helps to lower treatment costs by making sure that treatments work.
 
 \comment{
 Huiyan Wang (2008) has sought after a specialty in this sward by proposing a mechanized symptomatic model to advance normalization and promotion of conventional Chinese medication (TCM) finding. The system fills in as follows. First, the incidental effects are picked by acquiring the Bayesian association structure from a data set of cases that coordinate normal information speculation. In the design, the Markov blanket of the objective variable is chosen as the side effect set. Second, the planning connections between side effect sets and indicative results relies on naive Bayesian classifiers.
@@ -81,6 +152,9 @@ The next venture in the field was by Huang Jianyong (2004). This review aims to 
 
 \citealp{ismaeel2015using} attempts to replace the expensive clinical check-up by an advance warning system for patients that are probably going to experience the ill effects of heart disease. The proposed approach utilizes outrageous machine learning algorithm to show the different qualities of the dataset which is ongoing information gathered by the sever land clinical establishment containing 300 examples. The two machine learning technique Utmost Machine Learning and ANN were utilized for the investigation among which utmost Machine Learning shows the most highest precision of 87\%. The Utmost machine learning algorithm has five (0-4) results and utilizing this model, the analysis of new patient should be possible utilizing the past information.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \comment{
 Monika Gandhi et al (2015). The fundamental aim in this study is the mechanization of such system for diagnosing heart disease by thinking about earlier data and information. It plans to give details of different strategies of information deliberation by utilizing data mining techniques, including their benefits and negative marks.
 }
@@ -98,8 +172,10 @@ Monika Gandhi et al (2015). The fundamental aim in this study is the mechanizati
 
 \citealp{raihan2016smartphone} has fostered a straightforward way of forecasting the probability of IHD utilizing a smartphone. The use of clinical data gathered from patients conceded with IHD has developed Android-based model applications. Clinical data from 787 patients was examined with risk factors, for example, hypertension, diabetes, raised cholesterol, smoking, obesity, depression, and current clinical side effects that might show the hidden unrecognized  IHDs. Data were separated and a score was produced utilizing data mining innovation Risks for IHD are reviewed as low, medium, and strong. The authors observed that a significant relationship among low-and medium-and high-grade cardiovascular occasions was noticed for patients whose data were gathered to deliver the evaluations, individually; p=0.0001 and 0.0001. They gave a basic approach to recognizing the risk of IHD and are inclined to cardiology to keep away from sudden deaths. As of now, there are a couple of constraints on the open resources that make them unused by the population.
 
-\citealp{babu2017heart} have proposed that clinical data mining will investigate the mystery patterns of clinical informational indexes with extraordinary potential. These patterns may be utilized in clinical diagnosis. The data should be gotten in an organized way. From the medical services profiles, the patient can be anticipated by 14 attributes. MAFIA algorithms and decision tree order, utilizing data mining innovation to analyze heart diseases can accomplish as much accuracy as possible while diagnosing a heart condition. These medical industries could offer better findings and treatment of the patient to accomplish a decent nature of services. The primary benefits pointed out in the exploration are: early recognition of heart disease and its diagnosis accurately on time and providing treatment with affordable expense.
+\comment{
+\citealp{babu2017heart} have proposed that medical data mining can uncover hidden patterns in medical datasets. Clinical diagnosis could make good use of these patterns. Standardize data collection. Age, sex, blood pressure, blood sugar, and other medical profile factors can help in predicting heart disease risk. These features are input into K-means, MAFIA, and Decision tree classification in heart disease prediction, employing data mining to heart disease treatment; it can deliver a reliable performance in diagnosing heart disease. By doing so, medical industries can provide better patient diagnosis and treatment, improving service quality. This paper's key benefits include early detection, accurate diagnosis, and affordable treatment.
 
+}
 According to \citealp{mohan2019effective}, Machine learning has been indicated to be viable in serving with simple choices and forecasts from the tremendous measures of data delivered by the medical services industry. Machine learning methods are being used in ongoing improvements in various regions of the Internet of Things (IoT). Different investigations give just a brief look into predicting heart disease with machine learning procedures. Authors proposed a clever methodology that targets tracking down huge elements by applying machine learning procedures bringing about working on the precision in the estimate of cardiovascular sickness. The prediction model is given different mixes blends of features and a couple of known grouping procedures. We produce an improved performance level with an accuracy level of 88.7\% through the prediction model for coronary illness with the hybrid irregular forest with a linear model (HRFLM).
 
 \citealp{jabbar2016heart} said that heart disease is an overall driving reason for death. According to the authors, there is a need for an intelligent decision support system for for the prediction of heart disease is required. Strategies for data mining are additionally used to evaluate the patient's typical heart condition. Hidden Naive Bayes is a kind of data mining that reduces the conditional assumption of the usual Naïve Bayes. The model proposed noticed that the Hidden Naïve Bayes can be applied to the classification of heart disease. experimental results on heart disease data set show that the HNB records 100\% in terms of accuracy and out performs Naïve bayes.
