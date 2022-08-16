@@ -1,12 +1,10 @@
 \comment{https://www.youtube.com/watch?v=sgQAhG5Q7iY}
 
-The research sources and  methods are discussed in the following subsections.
-
 The proposed system is divided into three major components shown in \figurename~\ref{fig:sytem-overview} which includes the web client, web server and machine learning models. The web interface get the user health data and sends it to the web server for processing. The web server passes the data to the trained model and returns the binary output which the user sees.
 
 \begin{figure}[htb]
 	\centering
-	\makebox[0cm]{\includegraphics[scale=0.8]{system-overview.png}}
+	\makebox[0cm]{\includegraphics[scale=0.3]{system-overview.png}}
 	\caption{System overview}
 	\label{fig:sytem-overview}
 \end{figure}
@@ -17,19 +15,19 @@ The proposed system is divided into three major components shown in \figurename~
 
 \begin{figure}[htb]
 	\centering
-	\makebox[0cm]{\includegraphics[scale=0.6]{ml-workflow.png}}
+	\makebox[0cm]{\includegraphics[scale=0.3]{ml-workflow.png}}
 	\caption{Machine learning workflow}
 	\label{fig:ml-workflow}
 \end{figure}
 
 \subsection{Dataset}
-An estimated 17.9 million people die each year as a result of cardiovascular diseases (CVDs), making up 31\% of all deaths worldwide. Heart attacks and strokes are the cause of mortality for three-quarters of people under the age of 70 who die from CVD. Several CVDs can lead to heart failure, and this dataset comprises 11 variables that can be used to gauge the likelihood of heart failure.
+An estimated 17.9 million people die each year as a result of cardiovascular diseases (CVDs), making up 31\% of all deaths worldwide. Heart attacks and strokes are the cause of mortality for three-quarters of people under the age of 70 who die from CVD. Several CVDs can lead to heart failure, and this dataset comprises 11 variables that can be used to gauge the likelihood of heart failure \citep{world-health-organization-2019}.
 
 An early diagnosis and management strategy can be of significant use to people with coronary heart disease or those at high risk of developing the illness because of the existence of risk factors such as hypertension, diabetes, and hyperlipidaemia.
 
 \subsubsection{Features}
 These features represent the different columns in the dataset
-\begin{itemize}
+\begin{enumerate}[label=(\alph*)]
 	\item{\textbf{Age:} age of the patient [years]}
 	\item{\textbf{Sex:} sex of the patient [M: Male, F: Female]}
 	\item{\textbf{ChestPainType:} chest pain type [TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic]}
@@ -42,7 +40,7 @@ These features represent the different columns in the dataset
 	\item{\textbf{Oldpeak:} oldpeak = ST [Numeric value measured in depression]}
 	\item{\textbf{ST\textunderscore Slope:} the slope of the peak exercise ST segment [Up: upsloping, Flat: flat, Down: downsloping]}
 	\item{\textbf{HeartDisease}:output class [1: heart disease, 0: Normal]}
-\end{itemize}
+\end{enumerate}
 
 \subsubsection{Target variable}
 In the context of machine learning, the term "target variable" refers to the variable that either is or should be the output. If you are classifying the data, for instance, it could be a binary 0 or 1, but if you are running a regression, it could be a continuous variable. In the field of statistics, this concept is also known as the response variable.
@@ -98,9 +96,9 @@ Since text data cannot be understood by computers, we must transform these categ
 	\item{Label Encoding: using sklearn's LabelEncoder class}
 	\begin{lstlisting}[language=Python, caption=Label Encoder, numbers=none]
 	from sklearn.preprocessing import LabelEncoder\end{lstlisting}
-	\item{One Hot Encoding: using pandas get\_dummies method on the dataframe.}
+	\item{One Hot Encoding: using sklearn's OneHotEncoder class.}
 	\begin{lstlisting}[language=Python, caption=Get dummies, numbers=none]
-	pd.get_dummies()\end{lstlisting}
+	from sklearn.preprocessing import OneHotEncoder\end{lstlisting}
 \end{itemize}
 But we must know when to apply which kind of label encoding: \\
 \\
@@ -112,7 +110,7 @@ But we must know when to apply which kind of label encoding: \\
 \end{itemize}
 
 \noindent
-\textbf{For three based algorithms, label encoding is the best way to go.}
+\textbf{For tree based algorithms, label encoding is the best way to go.}
 
 \begin{itemize}
 	\item{LabelEncoder can convert [dog,cat,dog,mouse,cat] to [1,2,1,3,2], however the required ordinality means that cat is the average of dog and mouse. There are still algorithms that operate well with categorical variables, such as decision trees and random forests, and LabelEncoder can be used to store values with minimal disk space.}
@@ -126,80 +124,31 @@ In machine learning, choosing the best hyperparameters for a learning algorithm 
 The same machine learning model may need various constraints, weights, or rates of learning to generalize to diverse patterns of input data. These parameters, also known as hyperparameters, must be fine-tuned to ensure that the model is able to tackle the machine learning problem to its full potential. To minimize a predetermined loss function on provided independent data, a hyperparameter optimization model is constructed by finding a pair of hyperparameters that minimizes the loss function. The loss associated with a tuple of hyperparameters is returned by the objective function. As a generalization test, cross-validation is commonly utilized.
 }
 
-\subsection{Training the models}
-The following machine learning algorithms will be used for building the classification model.
+
 
 \subsubsection{Cross validation}
 In cross-validation, training data is split into a few parts. Some of these parts are used to train the model, and the rest are used to test it.
 
 The best cross-validation method to use will depend on the dataset you are working with, and it may or may not be applicable to other datasets. There are a few cross-validation techniques, though, that are the most well-known and frequently employed. These consist of:
 
-\begin{enumerate}
+\begin{enumerate}[label=(\alph*)]
 	\item K-fold cross-validation.
 	\item Stratified k-fold cross-validation
 \end{enumerate}
 
 You shouldn't use random k-fold cross-validation if you have a skewed dataset for binary classification with 90\% positive samples and only 10\% negative samples. If you use simple k-fold cross-validation on a set of data like this, you might end up with folds that have no positive samples at all. We like to use stratified k-fold cross-validation in these situations. The number of labels in each fold stays the same with stratified k-fold cross-validation. So, you will have the same 90\% positive and 10\% negative samples in each fold. So, no matter what metric you use to measure, the results will be the same for all folds. So in the case, we would be using stratified k-fold cross-validation technique.
 
-\subsubsection{Logistic regression}
-Classification algorithms, such as logistic regression, are supervised.
-This statistical model is frequently employed in categorization and predictive analytics. Based on a collection of independent variables, logistic regression calculates the likelihood that a certain event will occur. 
-
-As a result, the dependent variable is limited to a range of 0 to 1. 
-Independent variables are analysed to determine the binary outcome with the results falling into one of two categories. The independent variables can be categorical or numeric, but the dependent variable is always categorical. Written like this: $$P(Y=1|X) or P(Y=0|X)$$
-It calculates the probability of dependent variable Y, given independent variable X. 
-
 \comment{
-It calculates the probability of dependent variable Y, given independent variable X.
-
-This can be used to calculate the probability of a word having a positive or negative connotation (0, 1, or on a scale between). Or it can be used to determine the object contained in a photo (tree, flower, grass, etc.), with each object given a probability between 0 and 1.
-}
+\subsection{Training the models}
+The following machine learning algorithms will be used for building the classification model.
 
 
-
-\subsubsection{Naive Bayes}
-
-Naïve bayes is a machine learning algorithm used to solve classification problems. Naïve bayes is based on the Bayes Theorem and is one of the simplest yet powerful ML algorithms in use. It finds applications in many industries.
-
-The Bayes' theorem is used by Naïve Bayes algorithm, which also assumes that each predictor is independent. To put it another way, this classifier makes the assumption that the presence of one specific feature in a class has no influence on the presence of another.
-
-\begin{figure}[htb]
-	\centering
-	\makebox[0cm]{\includegraphics[scale=0.5]{nb.png}}
-	\caption{Naive bayes}
-	\label{fig:nb}
-\end{figure}
-
-
-\subsubsection{K-nearest neighbours}
-The K-nearest neighbors (KNN) algorithm is a form of supervised learning technique that can be used for regression as well as classification. KNN performs a distance calculation between the test data and all of the training points in an effort to determine which class the data being evaluated should be assigned to. The K number of points that should be selected is the one that comes closest to the test data. The KNN algorithm computes the chance that the test data belong to the same classes as the 'K' training data, and the class that retains the highest probability is the one that is chosen. In the case of regression, the value is determined by calculating the average of the 'K' training points that were chosen.
-\\
-
-Let's say we have a picture of something that looks like both a cat and a dog, but we want to know if it's a cat or a dog. We can use the KNN method for this identification because it measures similarity. Our KNN model will look for similarities between the new data set and the images of cats and dogs. Based on the similarities it finds, it will put the new data set into either the cat or dog category.
-
-\begin{figure}[htb]
-	\centering
-	\makebox[0cm]{\includegraphics[scale=0.45]{KNN.png}}
-	\caption{K-nearest neighbours}
-	\label{fig:knn}
-\end{figure}
-
-\subsubsection{Decision Tree}
-A decision tree is a non-parametric supervised learning algorithm that can be used for both classification and regression tasks. As a supervised learning technique, a decision tree is ideal for classifying issues at a precise level of detail. Like a flow chart, it takes data from the "tree trunk" and divides it into two related categories at a time: "branches" and "leaves." This allows for organic classification with minimal human oversight by creating categories within categories.
-
-\comment{
-	\begin{figure}[htb]
-		\centering
-		\makebox[0cm]{\includegraphics[scale=0.45]{dt.png}}
-		\caption{Decision tree}
-		\label{fig:dt}
-	\end{figure}
 }
 
 \subsection{Performance evaluation}
 When it comes to classification problems, the following measures are most frequently used:
 
-\begin{itemize}
+\begin{enumerate}[label=(\alph*)]
 	\item{Accuracy}
 	\item{Precision (P)}
 	\item{Recall (R)}
@@ -210,7 +159,7 @@ When it comes to classification problems, the following measures are most freque
 			\item{AUC is a metric that is frequently used in machine learning for skewed binary classification tasks.}
 		\end{itemize}
 	}
-\end{itemize}
+\end{enumerate}
 
 \section{Web interface}
 The web interface consists of the web server and client components that provides a way for users to interact with the machine learning algorithms.
@@ -224,11 +173,26 @@ The web interface consists of the web server and client components that provides
 
 A web server is software and hardware that responds to client requests sent over the World Wide Web using the HTTP (Hypertext Transfer Protocol) and other protocols. A web server's primary responsibility is to show website content by storing, processing, and sending webpages to users.
 
-The web server is built in python with the python \href{https://flask.palletsprojects.com/en/2.1.x/}{flask} web framework using \href{https://jinja.palletsprojects.com/en/3.1.x/}{jinja} as a templating engine for the client interface. The server extracts the input data from a form the user submits via a post endpoint and validates the data so there is no invalid input. The implementations of the server will be discussed in \autoref{chap:4}.
+The web server is built in python with the python \href{https://flask.palletsprojects.com/en/2.1.x/}{flask} web framework using \href{https://jinja.palletsprojects.com/en/3.1.x/}{jinja} as a templating engine for the client interface. The server extracts the input data from a form the user submits via an API endpoint and validates the data so there is no invalid input. The implementations of the server will be discussed in \autoref{chap:4}.
 
 \begin{figure}[htb]
 	\centering
-	\makebox[0cm]{\includegraphics[scale=0.8]{server.png}}
+	\makebox[0cm]{\includegraphics[scale=0.3]{server.png}}
 	\caption{Server}
 	\label{fig:server}
+\end{figure}
+
+\subsection{Flask}
+Flask is a lightweight Python web framework. It is called a micro-framework because you don't need any special tools or libraries to use it. It doesn't have a database abstraction layer, a form validation layer, or any other part where existing components are already provided by third-party libraries.
+\subsection{Jinja}
+Jinja is a Python programming language web template engine. Armin Ronacher developed it, and it is released under the BSD License. Jinja is comparable to the Django template engine, but it supports Python-like expressions and ensures that templates are evaluated in a sandbox.
+
+\section{Inference engine}
+In order to provide a response, an inference engine analyzes the facts included in the knowledge base and makes interpretations based on those evaluations. The inference engine in this study consists of a knowledge base and a parser. The knowledge base contains the expert knowledge encoded as rules in a yaml file. These encoded rules are then parsed by a parser which then generates inference based on the medical data.
+
+\begin{figure}[htb]
+	\centering
+	\makebox[0cm]{\includegraphics[scale=0.3]{inference-engine.png}}
+	\caption{Inference engine}
+	\label{fig:inference-engine}
 \end{figure}

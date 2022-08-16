@@ -10,7 +10,6 @@ def parse_conditions(kb, table):
                 val = int(condition[1:])
                 if table[attrname] > val:
                     inference += attribute[attrname]["messages"][condition] + " "
-                    print(inference)
             elif condition.startswith("<"):
                 val = int(condition[1:])
                 if table[attrname] < val:
