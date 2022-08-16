@@ -1,0 +1,129 @@
+\chapter{Listings}
+
+\begin{lstlisting}[language=Python, caption={Correlation chart}, label={lst:corr}]
+	pd.options.display.float_format = "{:,.3f}".format
+	plt.figure(figsize=(10,8))
+	sns.set_context('notebook',font_scale = 1.15)
+	sns.heatmap(df.corr(),annot=True, linewidths=1)
+	plt.savefig("corr.png")
+	plt.show()
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={Plotting select numerical features with target column}, label={lst:plot-numerical}]
+	cols_to_plot = ["Age", "FastingBS"]
+	for i in cols_to_plot:
+	plt.figure(figsize=(14,5))
+	sns.countplot(x=df[i], data=df, hue='HeartDisease')
+	plt.legend(['Normal', 'Heart Disease'])
+	plt.title(i)
+	plt.tight_layout()
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={Plotting categorical values}, label={lst:plot-categorical}]
+	# ploting categorical features with target
+	for i in categorical:
+	plt.figure(figsize=(10,5))
+	sns.countplot(x=i, data=df, hue='HeartDisease', edgecolor='black')
+	plt.legend(['Normal', 'Heart Disease'])
+	plt.title(i)
+	plt.show()
+\end{lstlisting}
+
+\begin{lstlisting}[numbers=none, label={lst:dataset-info-output}, caption={Dataset information}]
+	RangeIndex: 918 entries, 0 to 917
+	Data columns (total 12 columns):
+	#   Column          Non-Null Count  Dtype  
+	---  ------          --------------  -----  
+	0   Age             918 non-null    int64  
+	1   Sex             918 non-null    object 
+	2   ChestPainType   918 non-null    object 
+	3   RestingBP       918 non-null    int64  
+	4   Cholesterol     918 non-null    int64  
+	5   FastingBS       918 non-null    int64  
+	6   RestingECG      918 non-null    object 
+	7   MaxHR           918 non-null    int64  
+	8   ExerciseAngina  918 non-null    object 
+	9   Oldpeak         918 non-null    float64
+	10  ST_Slope        918 non-null    object 
+	11  HeartDisease    918 non-null    int64  
+	dtypes: float64(1), int64(6), object(5)
+	memory usage: 86.2+ KB
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={Scaling with MinMaxScaler}, label={lst:min-max-scaler}]
+	from sklearn.preprocessing import MinMaxScaler
+	
+	scal = MinMaxScaler()
+	X_train = scal.fit_transform(df_nontree[feature_col_nontree].values)
+	Y_train = df_nontree[target_col]
+	df[string_col]=df[string_col].astype("string")
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={Applying Label Encoder to the dataframe}, label={lst:label-encoding}]
+	from sklearn.preprocessing import LabelEncoder
+	
+	le = LabelEncoder()
+	df_cat = df[string_col].apply(le.fit_transform)
+\end{lstlisting}
+\begin{lstlisting}[language=Python, caption={Applying One-Hot Encoder to the dataframe}, label={lst:one-hot-encoding}]
+	from sklearn.preprocessing import OneHotEncoder
+	from sklearn.compose import make_column_transformer
+	target_col="HeartDisease"
+	df_nontree = df.drop(target_col,axis=1)	
+	ohe = OneHotEncoder(handle_unknown='ignore')
+	transformer = make_column_transformer(
+		(OneHotEncoder(), string_col),
+			remainder='passthrough',
+			verbose_feature_names_out=False
+		)
+		
+	transformed = transformer.fit_transform(df_nontree)
+	df_nontree = pd.DataFrame(
+		transformed, 
+		columns=transformer.get_feature_names_out()
+	)
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={App Entrypoint}, label={lst:web-server-entrypoint}]
+	from flask import Flask
+	from flask_assets import Bundle, Environment
+	from app.views.index import index
+	from app.config import Config
+	
+	def create_app():
+	app = Flask(__name__)
+	app.config.from_object(Config)
+	assets = Environment(app)
+	
+	css = Bundle("src/main.css", output="dist/main.css")
+	
+	assets.register("css", css)
+	css.build()
+	
+	app.register_blueprint(index)
+	
+	return app
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python, caption={Knowledge base parser}, label={lst:kb-parser}]
+	def parse_conditions(kb, table):
+		inference = ""
+		for attribute in kb:
+			attrname = list(attribute.keys())[0]
+			for condition in attribute[attrname]["conditions"]:
+				if condition.startswith(">"):
+					val = int(condition[1:])
+					if table[attrname] > val:
+						inference += attribute[attrname]["messages"][condition] + " "
+				elif condition.startswith("<"):
+					val = int(condition[1:])
+					if table[attrname] < val:
+						inference += attribute[attrname]["messages"][condition] + " "
+				elif condition == "True":
+					if table[attrname] == True:
+						inference += attribute[attrname]["messages"][condition] + " "
+				elif condition == "False":
+					if table[attrname] == False:
+						inference += attribute[attrname]["messages"][condition] + " "
+		return inference
+\end{lstlisting}

@@ -1,5 +1,5 @@
 \comment{https://www.youtube.com/watch?v=sgQAhG5Q7iY}
-
+\noindent
 The proposed system is divided into three major components shown in \figurename~\ref{fig:sytem-overview} which includes the web client, web server and machine learning models. The web interface get the user health data and sends it to the web server for processing. The web server passes the data to the trained model and returns the binary output which the user sees.
 
 \begin{figure}[htb]
@@ -50,25 +50,16 @@ In the context of this research, the variable HeartDisease serves as our target 
 \subsection{Exploratory data analysis}
 Exploratory data analysis, (EDA) is the important process of looking at data for the first time to find patterns, find outliers, test hypotheses, and check assumptions with the help of summary statistics and graphical representations. This is done to make sure that the data are correct and can be reliable. 
 
-\subsubsection{Why do we need EDA?}
-The reasons for perfoming EDA are summarized below:
+\subsubsection{Importance of exploratory data analysis}
+There are several reasons for performing EDA which includes; understanding the dataset helps clean up the dataset; gives a clear idea of the features and how they fit together; gives guidelines for what variables are important and what variables can be left out or taken away; handling of missing values or human error; help get the most information out of the dataset.
 
-\begin{enumerate}
-	\item Understanding the dataset helps clean up the dataset.
-	\item It gives a clear idea of the features and how they fit together.
-	\item Gives guidelines for what variables are important and what variables can be left out or taken away.
-	\item Handling Missing values or human error.
-	\item Identifying outliers.
-	\item The EDA process would help to get the most information out of a dataset.
-	\item EDA takes time but its very effective.
-\end{enumerate}
 
 \subsection{Data preprocessing}
 Data preprocessing is required for accurate data representation and machine learning classifiers, for proper training and evaluation. For the dataset to be used effectively by the classifiers, preprocessing methods such imputation, feature scaling and handling of categorical variable have been applied.
 
 \subsubsection{Imputation}
 Imputation is a straightforward operation that involves replacing the values in our dataset that are absent (null). We can accomplish this by implementing our own specialized function, or we can simply perform imputation by making use of sklearn's built-in SimpleImputer class. Both of these options are available to use. For example:
-\begin{lstlisting}[language=Python, numbers=none, label=Simple Imputer]
+\begin{lstlisting}[language=Python, numbers=none, label={lst:simple-imputer}]
 	from sklearn.impute import SimpleImputer
 	
 	imputer = SimpleImputer(missing_values=np.nan, strategy='mean')

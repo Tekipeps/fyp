@@ -46,6 +46,18 @@
 \lstset{style=mystyle}
 %for code highlighting
 
+
+% TABLE OF CONTENTS
+\usepackage{titletoc}%
+\titlecontents{chapter}% <section-type>
+[0pt]% <left>
+{\bfseries}% <above-code>
+{\chaptername\ \thecontentslabel:\quad}% <numbered-entry-format>
+{}% <numberless-entry-format>
+{\hfill\contentspage}% <filler-page-format>
+
+
+
 \usepackage{enumitem} %% for enumerate a b c]
 \usepackage{setspace}
 % single spacing for table of contents
@@ -59,75 +71,89 @@
 \usepackage{newtxtext, newtxmath}
 \usepackage{floatrow} % 2 images on one row
 
-\usepackage{titletoc}% 
-\titlecontents{chapter}% <section-type>
-[0pt]% <left>
-{}% <above-code>
-{\bfseries\chaptername\ \thecontentslabel\quad}% <numbered-entry-format>
-{\bfseries}% <numberless-entry-format>
-{\bfseries\hfill\contentspage}% <filler-page-format>
-
-%\usepackage{titlesec}
-% \titleformat{\section}[block]{\Large\bfseries\filcenter}{}{1em}{}
-% \titleformat{\section}[hang]{\bfseries}{}{1em}{}
+\usepackage[explicit, pagestyles]{titlesec}
 
 
-% THE CODE I'VE TRIED
-\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
-\makeatletter
-% \patchcmd{<cmd>}{<search>}{<replace>}{<success>}{<failure>}
-% --- Patch \chapter
-\patchcmd{\@makechapterhead}{50\p@}{\chapheadtopskip}{}{}% Space from top of page to CHAPTER X
-\patchcmd{\@makechapterhead}{20\p@}{\chapheadsep}{}{}% Space between CHAPTER X and CHAPTER TITLE
-\patchcmd{\@makechapterhead}{40\p@}{\chapheadbelowskip}{}{}% Space between CHAPTER TITLE and text
-% --- Patch \chapter*
-\patchcmd{\@makeschapterhead}{0\p@}{\chapheadtopskip}{}{}% Space from top of page to CHAPTER TITLE
-\patchcmd{\@makeschapterhead}{40\p@}{\chapheadbelowskip}{}{}% SPace between CHAPTER TITLE and text
-\makeatother
-% Set new lengths
-\newlength{\chapheadtopskip}\setlength{\chapheadtopskip}{5pt}
-\newlength{\chapheadsep}\setlength{\chapheadsep}{5pt}
-\newlength{\chapheadbelowskip}\setlength{\chapheadbelowskip}{5pt}
-% END THE CODE I'VE TRIED
+
 
 \newcommand{\comment}[1]{}
 
-\title{
-	\noindent
-	{Heart disease prediction using machine learning techniques}\\
-	{\large Anchor University Lagos}\\
-	{\vspace{10mm}{\includegraphics[scale=0.6]{university.png}}}
-}
-\author{Tekena Solomon}
-\date{\today}
 
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
+
+
+\newpagestyle{mine}{%
+	
+	\setfoot{}{}{\thepage}}%
+
+\renewpagestyle{plain}{%
+	\setfoot{}{}{\thepage}}%
+
+\titleformat{\chapter}[display]{\bfseries\centering}{\huge Chapter \thechapter}{1em}{\LARGE #1}
+\titlespacing{\chapter}{0pt}{-32pt}{1cm}% <-- CHANGE DONE HERE!!
+
+\pagestyle{mine}
+
 \begin{document}
-
-
-\maketitle
+\input{chapters/title}
 \doublespacing
-\begin{abstract}
-		Heart disease, often known as cardiovascular disease, encompasses a variety of disorders that affect the heart and has been the leading cause of mortality worldwide in recent years. Because of the many factors that can increase the likelihood of developing heart disease, it is essential to create efficient and effective methods of early identification. This study discusses four different machine learning models based on supervised learning techniques like naive bayes, decision tree, logistic regression and K-nearest neighbours. A web interface is built to provide users a way to interact with the model. The system also has an inference engine that provides a descriptive output and medical advice based on the input data.
 
-\end{abstract}
+\pagenumbering{roman}
+\clearpage
+\setcounter{page}{2}
+
+\chapter*{DECLARATION}
+\noindent
+I admit that I did all the work on this project by myself and that it has never been turned in for credit toward a degree. The report is also all written in my own words, except for a few quotes that were properly credited and acknowledged. Miss Asegunoluwa Babalola was my supervisor in charge of supervising both the project work and the report.
+
+\vspace{10mm}
+\begin{tabular}{@{}p{.5in}p{2in}@{}}
+	Signature: & \hrulefill \\
+	& Tekena Solomon \\
+\end{tabular}
+\addcontentsline{toc}{chapter}{DECLARATION}
+
+\chapter*{CERTIFICATION}
+\noindent
+\normalsize This is to certify that \textbf{TEKENA SOLOMON} with matriculation number AUL/SCI/18/00256 carried out this project work titled 'HEART DISEASE PREDICTION USING MACHINE LEARNING TECHNIQUES' under supervision and that this project work has not been submitted before. \\[1.0cm]
+
+\vspace{0.8cm}
+
+%\centering
+
+\begin{center}
+	\includegraphics[scale=1]{signers.png}
+\end{center}
+
+\vfill
 
 
-%\chapter*{Keywords}
-%keywords here?
+\begin{flushleft}
+Date:
+\end{flushleft}
+\addcontentsline{toc}{chapter}{CERTIFICATION}
 
-\chapter*{Dedication}
-This project is dedicated to my mum, who has always been there for me and encouraged me to keep going, even when times were tough; to my friends Allwell and Sahil, who have been there for me through thick and thin.
+\chapter*{ACKNOWLEDGEMENTS}
+\noindent
+I want to thank God, for giving me the strength and wisdom to complete this project, my parents,for their constant support and to my supervisor Miss Asegunloluwa Babalola for her constant support.
+\addcontentsline{toc}{chapter}{ACKNOWLEDGEMENTS}
 
-%\chapter*{Declaration}
-%I declare that..
-%
-%\chapter*{Acknowledgements}
-%I want to thank...
+\chapter*{DEDICATION}
+\noindent
+This project is dedicated to my mum and dad, who has always been there for me and encouraged me to keep going, even when times were tough; to my friends Allwell and Sahil, who have been there for me through thick and thin.
+\addcontentsline{toc}{chapter}{DEDICATION}
+
+
+\chapter*{ABSTRACT}
+\noindent
+Heart disease, often known as cardiovascular disease, encompasses a variety of disorders that affect the heart and has been the leading cause of mortality worldwide in recent years. Because of the many factors that can increase the likelihood of developing heart disease, it is essential to create efficient and effective methods of early identification. This study discusses four different machine learning models based on supervised learning techniques like naive bayes, decision tree, logistic regression and K-nearest neighbours. A web interface is built to provide users a way to interact with the model. The system also has an inference engine that provides a descriptive output and medical advice based on the input data.
+\addcontentsline{toc}{chapter}{ABSTRACT}
+
 
 {
 	\onehalfspacing
+	\renewcommand{\contentsname}{Table of Contents}
 	\tableofcontents
 	%\listoftables
 	\listoffigures
@@ -135,7 +161,14 @@ This project is dedicated to my mum, who has always been there for me and encour
 }
 
 
+
+%\chapter*{Keywords}
+%keywords here?
+
+
 \chapter{Introduction}
+\pagenumbering{arabic}
+\setcounter{page}{1}
 \input{chapters/introduction}
 
 \chapter{Literature Review}
@@ -162,8 +195,7 @@ Definition. An appendix contains supplementary material that is not an essential
 \bibliographystyle{apalike}
 \bibliography{chapters/references}
 
-%\appendix
-%\chapter{Appendix Title}
-%\input{chapters/appendix}
+\appendix
+\input{chapters/appendix}
 
 \end{document}
