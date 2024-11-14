@@ -1,4 +1,5 @@
 \documentclass[12pt,paper=a4,oneside,cleardoubleage=plain,final]{report}
+
 \usepackage[utf8]{inputenc}
 
 % Hyperreferencing and citations
@@ -73,9 +74,6 @@
 
 \usepackage[explicit, pagestyles]{titlesec}
 
-
-
-
 \newcommand{\comment}[1]{}
 
 
@@ -90,9 +88,33 @@
 \renewpagestyle{plain}{%
 	\setfoot{}{}{\thepage}}%
 
-\titleformat{\chapter}[display]{\bfseries\centering}{\huge Chapter \thechapter}{1em}{\LARGE #1}
-\titlespacing{\chapter}{0pt}{-32pt}{1cm}% <-- CHANGE DONE HERE!!
 
+% Update chapter title format
+\titleformat{\chapter}[display]
+{\normalfont\fontsize{12pt}{14pt}\selectfont\bfseries\centering} % 12pt chapter title
+{\normalfont Chapter \thechapter} % Chapter label
+{1em} % Space between the number and the title
+{#1} % Title text
+
+\titlespacing{\chapter}{0pt}{-32pt}{1cm} % Adjust spacing for chapters
+
+% Update section title format
+\titleformat{\section}
+{\normalfont\fontsize{12pt}{14pt}\selectfont\bfseries} % 12pt section title
+{\thesection} % Section number
+{1em} % Space between number and title
+{#1} % Title text
+
+\titlespacing{\section}{0pt}{1.5ex plus .1ex}{1.5ex plus .1ex} % Adjust spacing for sections
+
+% Update subsection title format
+\titleformat{\subsection}
+{\normalfont\fontsize{12pt}{14pt}\selectfont\bfseries} % 12pt subsection title
+{\thesubsection} % Subsection number
+{1em} % Space between number and title
+{#1} % Title text
+
+\titlespacing{\subsection}{0pt}{1.25ex plus .1ex}{1.25ex plus .1ex} % Adjust spacing for subsections
 \pagestyle{mine}
 
 \begin{document}
@@ -105,7 +127,7 @@
 
 \chapter*{DECLARATION}
 \noindent
-I admit that I did all the work on this project by myself and that it has never been turned in for credit toward a degree. The report is also all written in my own words, except for a few quotes that were properly credited and acknowledged. Miss Asegunoluwa Babalola was my supervisor in charge of supervising both the project work and the report.
+I, TEKENA SOLOMON admit that I did all the work on this project by myself and that it has never been turned in for credit toward a degree. The report is also all written in my own words, except for a few quotes that were properly credited and acknowledged. Ms. A. E. Babalola was my supervisor in charge of supervising both the project work and the report.
 
 \vspace{10mm}
 \begin{tabular}{@{}p{.5in}p{2in}@{}}
@@ -122,16 +144,19 @@ I admit that I did all the work on this project by myself and that it has never 
 
 %\centering
 
-\begin{center}
-	\includegraphics[scale=1]{signers.png}
-\end{center}
+\noindent
+\begin{tabular}{@{}p{0.5\textwidth}p{0.5\textwidth}@{}}
+	Supervisors' Name & \\[0.2cm]
+	Ms. A. E. Babalola & Signature \& Date\dotfill \\[1cm]
+	Head Of Department & \\[0.2cm]
+	Dr.  J. B. Odili & Signature \& Date\dotfill \\[1cm]
+	Prof. A. P Adewole & \\[0.2cm]
+	(External Supervisor) & Signature \& Date\dotfill \\
+\end{tabular}
 
 \vfill
 
 
-\begin{flushleft}
-Date:
-\end{flushleft}
 \addcontentsline{toc}{chapter}{CERTIFICATION}
 
 \chapter*{ACKNOWLEDGEMENTS}
@@ -147,7 +172,7 @@ This project is dedicated to my mum and dad, who has always been there for me an
 
 \chapter*{ABSTRACT}
 \noindent
-Heart disease, often known as cardiovascular disease, encompasses a variety of disorders that affect the heart and has been the leading cause of mortality worldwide in recent years. Because of the many factors that can increase the likelihood of developing heart disease, it is essential to create efficient and effective methods of early identification. This study discusses four different machine learning models based on supervised learning techniques like naive bayes, decision tree, logistic regression and K-nearest neighbours. A web interface is built to provide users a way to interact with the model. The system also has an inference engine that provides a descriptive output and medical advice based on the input data.
+Heart disease, a leading global health concern, necessitates accurate and timely diagnosis. This research presents a machine learning-based system for predicting cardiovascular disease, utilizing a comprehensive dataset derived from multiple sources. The system employs supervised learning algorithms, including Naive Bayes, Decision Tree, Logistic Regression, and K-Nearest Neighbors. To evaluate the system's performance, we employed Stratified K-Fold cross-validation and assessed accuracy using the Area Under the ROC Curve (AUC). The K-Nearest Neighbors algorithm demonstrated the highest performance, achieving a peak accuracy of 91.6\%. This system offers a valuable tool for early detection and risk assessment of heart disease, empowering individuals and healthcare professionals to make informed decisions regarding prevention and treatment. By providing timely insights, this system can contribute to improving cardiovascular health outcomes and reducing the burden of heart disease.
 \addcontentsline{toc}{chapter}{ABSTRACT}
 
 
